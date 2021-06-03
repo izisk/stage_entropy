@@ -72,14 +72,11 @@ int main(int argc, char ** argv){
     temps_fin = clock();
     temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
     tempsmoyen+=temps;
-    
 	}
   tempsmoyen = tempsmoyen/nb_experiment;
 
-	printf("%Lg %Lg\n", target,
-	       //expected_cmp_number(distribution, alphabet_size, pattern_size),
-	       nb_comparaisons/(long double)(nb_experiment));
-	printf("temps moyen = %.2f secondes\n",tempsmoyen);
+	printf("%Lg %Lg %f\n", target,
+	        nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
 	
     }
     return EXIT_SUCCESS;

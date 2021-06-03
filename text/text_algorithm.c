@@ -13,7 +13,7 @@ int comparer_lettre(char l1,char l2){
 
 
 
-int algorithme_naif(char * texte,char * motif,int n,int m){
+int algorithme_naif(unsigned char * texte,unsigned char * motif,int n,int m){
   int i,j;
   int occ;
   for(i=0,occ=0;i<=(n-m);i++){
@@ -30,7 +30,7 @@ int algorithme_naif(char * texte,char * motif,int n,int m){
 
 
 
-int * derniere_occ(char * mot,int m,int k){
+int * derniere_occ(unsigned char * mot,int m,int k){
   int * last_occ=(int *)malloc(sizeof(int)*k);
   int x;
   for(x = 0; x < k; x++)
@@ -41,19 +41,19 @@ int * derniere_occ(char * mot,int m,int k){
   return last_occ;
 }
 
-void echanger(char * x,char * y){
+void echanger(unsigned char * x,unsigned char * y){
   char tmp=*x;
   *x=*y;
   *y=tmp;  
 }
 
-void inverser_mot(char * motif,int m){
+void inverser_mot(unsigned char * motif,int m){
   int i,j;
   for(i=0,j=m-1;i<j;++i,--j)
     echanger(&motif[i],&motif[j]);
 } 
 
-int * kmp_bord(char * mot,int m){
+int * kmp_bord(unsigned char * mot,int m){
   int i,j;
   int * table_bord=(int *)malloc(sizeof(int)*(m+1));
   table_bord[0] = -1;
@@ -71,7 +71,7 @@ int * kmp_bord(char * mot,int m){
   return table_bord;
 }
 
-int knuth_morris_pratt(char * texte,char * motif,int n,int m){
+int knuth_morris_pratt(unsigned char * texte,unsigned char * motif,int n,int m){
   int i=0,j=0;
   int * table_bord;
   int occ=0;
@@ -93,7 +93,7 @@ int knuth_morris_pratt(char * texte,char * motif,int n,int m){
 }
 
 
-int * bm_bon_decalage(char * mot,int m){
+int * bm_bon_decalage(unsigned char * mot,int m){
   int * table_bord;
   int * bon_suff=(int *)malloc(sizeof(int)*(m+1));
   int i,l;
@@ -114,7 +114,7 @@ int * bm_bon_decalage(char * mot,int m){
   return bon_suff;
 }
 
-int boyer_moore(char * texte, char * motif,int n,int m,int k){
+int boyer_moore(unsigned char * texte, unsigned char * motif,int n,int m,int k){
   int * last_occ=derniere_occ(motif,m,k);
   int * bon_suff=bm_bon_decalage(motif,m);
   int i,j;
