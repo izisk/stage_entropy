@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<time.h>
-#include"entropy.h"
+#include"../entropy.h"
 #include"text_algorithm.h"
 #include"text_generator.h"
 
@@ -50,22 +50,36 @@ int main(int argc, char ** argv){
     char alphabet[alphabet_size];    
     int i;
     int nb_experiment = 10000;
+    clock_t temps_deb, temps_fin;
+    double temps;
+    double tempsmoyen = 0;
     
     create_alphabet(alphabet, alphabet_size);
     for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
 
 	for(i = 0; i < nb_experiment; i++){
+    //temps debut
+    temps_deb = clock();
+  
 	  if(i % 100 == 0)
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, text_size);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, pattern_size);
 	  algorithme_naif(text, pattern, text_size, pattern_size);
+
+    //temps fin
+    temps_fin = clock();
+    temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
+    tempsmoyen+=temps;
+    
 	}
+  tempsmoyen = tempsmoyen/nb_experiment;
+
 	printf("%Lg %Lg\n", target,
 	       //expected_cmp_number(distribution, alphabet_size, pattern_size),
 	       nb_comparaisons/(long double)(nb_experiment));
-	
+	printf("temps moyen = %.2f secondes\n",tempsmoyen);
 	
     }
     return EXIT_SUCCESS;
