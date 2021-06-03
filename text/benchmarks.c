@@ -5,7 +5,7 @@
 #include"../entropy.h"
 #include"text_algorithm.h"
 #include"text_generator.h"
-
+#include"benchmarks.h"
 
 void create_alphabet(char * alphabet, int size){
   int i;
@@ -32,27 +32,31 @@ int main(int argc, char ** argv){
     clock_t temps_deb, temps_fin;
     double temps;
     double tempsmoyen = 0;
+
     
     create_alphabet(alphabet, alphabet_size);
     for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
 
 	for(i = 0; i < nb_experiment; i++){
-     //temps debut
+    //temps debut
     temps_deb = clock();
-
+  
 	  if(i % 100 == 0)
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, text_size);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, pattern_size);
-	  knuth_morris_pratt(text, pattern, text_size, pattern_size);
+	  search(pattern, pattern_size, text, text_size);
 
     //temps fin
     temps_fin = clock();
     temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
     tempsmoyen+=temps;
 	}
+  tempsmoyen = tempsmoyen/nb_experiment;
+
 	printf("%Lg %Lg %f\n", target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+	
     }
     return EXIT_SUCCESS;
 }
