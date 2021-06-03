@@ -68,6 +68,9 @@ long double aim_function(long double p, long double p_left){
     return - ( p*log2(p) + (p_left-p)*log2(p_left-p) );
 }
 
+/**
+   Computes the value of the two remaining variables, in order to garantee 
+*/
 long double aim_shannon_entropy(long double probability_left, long double target){
   long double p = probability_left/2;
   long double step = p/2.;
@@ -86,6 +89,8 @@ long double aim_shannon_entropy(long double probability_left, long double target
   }
   // the precision for entropy is lower than for probabilities.
   if((float)entropy_p!=(float)target)
+    return -1;
+  if(p == (probability_left-p) && rand()%2 == 1)
     return -1;
   if(rand()%2)
     return p;
