@@ -22,7 +22,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void preBmBc(unsigned char *x, int m, int bmBc[]) {
     int i;
@@ -41,7 +44,10 @@ void suffixes(unsigned char *x, int m, int *suff) {
         else {
             if (i < g) g = i;
             f = i;
-            while (g >= 0 && x[g] == x[g + m - 1 - f]) --g;
+            while (g >= 0 && x[g] == x[g + m - 1 - f]) {
+                --g;
+                //nb_comparaisons++;
+            }
             suff[i] = f - g;
         }
     }
@@ -68,14 +74,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     int bmGs[XSIZE], skip[XSIZE], suff[XSIZE], bmBc[SIGMA];
   
     /* Preprocessing */
-    BEGIN_PREPROCESSING
+    //BEGIN_PREPROCESSING
     preBmGsAG(x, m, bmGs, suff);
     preBmBc(x, m, bmBc);
     memset(skip, 0, m*sizeof(int));
-    END_PREPROCESSING
+    //END_PREPROCESSING
   
     /* Searching */
-    BEGIN_SEARCHING
+    //BEGIN_SEARCHING
     count = 0;
     j = 0;
    	while (j <= n - m) {
@@ -95,7 +101,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
                     if (k < s) break;
                 }
             else {
-                if (x[i] == y[i + j]) --i;
+                if (x[i] == y[i + j]) {
+                    --i;
+                    nb_comparaisons++;
+                }
                 else break;
             }
         }
@@ -112,7 +121,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
         memcpy(skip, skip + shift, (m - shift)*sizeof(int));
         memset(skip + m - shift, 0, shift*sizeof(int));
     }
-    END_SEARCHING    
+    //END_SEARCHING    
     return count;
 }
 

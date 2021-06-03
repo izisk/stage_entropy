@@ -12,6 +12,8 @@ naif_xp: text/naif_xp.o entropy.o text/text_generator.o text/text_algorithm.o
 kmp: text/kmp.o entropy.o text/text_generator.o text/text_algorithm.o
 	gcc $(CFLAGS) text/kmp.o entropy.o text/text_generator.o text/text_algorithm.o -o kmp -lm
 
+ag: algos/ag.o entropy.o text/text_generator.o text/benchmarks.o
+	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks.o -o ag -lm
 
 clean:
 	rm *.o text/*.o
