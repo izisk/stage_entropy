@@ -22,7 +22,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void preKmp(unsigned char *x, int m, int kmpNext[]) {
    int i, j;
@@ -45,16 +48,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    int i, j, kmpNext[XSIZE], count;
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    preKmp(x, m, kmpNext);
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* Searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
    i = j = 0;
    while (j < n) {
       while (i > -1 && x[i] != y[j])
+         nb_comparaisons++;
          i = kmpNext[i];
       i++;
       j++;
@@ -63,7 +67,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
          i = kmpNext[i];
       }
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }
 

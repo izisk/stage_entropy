@@ -34,7 +34,7 @@ int main(int argc, char ** argv){
     double tempsmoyen = 0;
     
     create_alphabet(alphabet, alphabet_size);
-    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
+    for(target = 0.001; target <= (log2(alphabet_size)-0.2); target +=0.01){
       	nb_comparaisons = 0;
 
 	for(i = 0; i < nb_experiment; i++){
