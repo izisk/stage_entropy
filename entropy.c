@@ -308,7 +308,7 @@ void random_distribution_generator(long double * res, long double target_entropy
 	distribution_markov_chain(res, target_entropy, size, steps);
       else{
 	res[0] = aim_shannon_entropy(1, target_entropy);
-	if( res[0] != 1-res[0] rand()%2 == 0){
+	if( res[0] != 1-res[0] && rand()%2 == 0){
 	  res[1] = res[0];
 	  res[0] = 1-res[1];
 	}
