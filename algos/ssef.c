@@ -97,7 +97,14 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
          i = ((ptr16 - &T.data16[0])-last)*16;
          t = flist[filter];
          while(t) {
-            if (memcmp(x,&T.data[i+t->pos],Plen) == 0) count++;
+            //version du if en dessous afin de pouvoir incrementer nb_comparaisons
+            int cmpt = 0;
+            while(cmpt < Plen && (x[cmpt] == &T.data[i+t->pos][cmpt])){// probleme car impossible d'acceder a &T.data[i+t->pos][cmpt]
+               nb_comparaisons++;
+               cmpt++;
+            }
+            if (cmpt == Plen) count++;
+            //if (memcmp(x,&T.data[i+t->pos],Plen) == 0) count++;
             t=t->next;
          }
       }

@@ -22,8 +22,11 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
 #define RANK3 3
+
+long long int nb_comparaisons;
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
    int count, j, i, sh, sh1, mMinus1, mMinus2, shift[WSIZE];
@@ -33,7 +36,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    mMinus1 = m-1;
    mMinus2 = m-2;
 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    for (i = 0; i < WSIZE; ++i)
       shift[i] = mMinus2;
 
@@ -53,10 +56,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    sh1 = shift[h];
    shift[h] = 0;
    if(sh1==0) sh1=1;
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    i = mMinus1;
    memcpy(y+n, x, m);
    while (1) {
@@ -70,14 +73,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       }
       if (i < n) {
          j=0;
-         while(j<m && x[j]==y[i-mMinus1+j]) j++;
+         while(j<m && x[j]==y[i-mMinus1+j]) {
+            j++;
+            nb_comparaisons++;
+         }
          if (j>=m) {
             OUTPUT(i-mMinus1);
          }
          i+=sh1;
       }
       else {
-      	END_SEARCHING
+      	//END_SEARCHING
       	return count;
       }
    }

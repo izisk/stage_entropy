@@ -22,7 +22,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void preSA(unsigned char *x, int m, unsigned int S[]) { 
    unsigned int j, lim; 
@@ -40,19 +43,19 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    if (m > WORD) return search_large(x,m,y,n);
 
    /* Preprocessing */ 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    preSA(x, m, S); 
    F = 1<<(m-1);
-   END_PREPROCESSING
+   //END_PREPROCESSING
    
    /* Searching */ 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
    for (D = 0, j = 0; j < n; ++j) { 
       D = ((D<<1) | 1) & S[y[j]]; 
       if (D & F) OUTPUT(j - m + 1); 
    } 
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 } 
 
@@ -71,24 +74,27 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    m=32;
 
    /* Preprocessing */ 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    preSA(x, m, S); 
    F = 1<<(m-1);
-   END_PREPROCESSING
+   //END_PREPROCESSING
    
    /* Searching */ 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
    for (D = 0, j = 0; j < n; ++j) { 
       D = ((D<<1)|1) & S[y[j]]; 
       if (D & F) {
          k = 0;
          h = j-m+1;
-         while(k<p_len && x[k]==y[h+k]) k++;
+         while(k<p_len && x[k]==y[h+k]) {
+            k++;
+            nb_comparaisons++;
+         }
          if(k==p_len) OUTPUT(j - m + 1); 
       }
    } 
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 } 
 
