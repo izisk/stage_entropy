@@ -24,8 +24,11 @@
 
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
 #define GRAM4(j) (B[y[j]]<<3)&(B[y[j-1]]<<2)&(B[y[j-2]]<<1)&B[y[j-3]]
+
+long long int nb_comparaisons;
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
    unsigned int B[SIGMA], D, q;
@@ -35,7 +38,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    if(m<q) return -1;
    if(m>32) return search_large(x,m,y,n);
 
-	BEGIN_PREPROCESSING
+	//BEGIN_PREPROCESSING
    count = 0;
    mMinusq = m - q +1;
    mq = m - q;
@@ -50,10 +53,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       j++;
       if(D & (1<<(m-1))) shift = m-j;
       }
-	END_PREPROCESSING
+	//END_PREPROCESSING
 
-	BEGIN_SEARCHING
-   if( !memcmp(x,y,m) ) OUTPUT(0);
+	//BEGIN_SEARCHING
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<m && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != m) OUTPUT(0);
+   //if(!memcmp(x,y,m)) OUTPUT(0); 
    j = m;
    while (j < n) {
       D = GRAM4(j);
@@ -68,7 +78,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       }
       else j+=mMinusq;
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }
 
@@ -88,7 +98,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    m = 32;
    int diff = p_len-m;
    
-	BEGIN_PREPROCESSING
+	//BEGIN_PREPROCESSING
    count = 0;
    mMinusq = m - q +1;
    mq = m - q;
@@ -103,10 +113,17 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       j++;
       if(D & (1<<(m-1))) shift = m-j;
    }
-	END_PREPROCESSING
+	//END_PREPROCESSING
 
-	BEGIN_SEARCHING
-   if( !memcmp(x,y,p_len) ) OUTPUT(0);
+	//BEGIN_SEARCHING
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<p_len && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != p_len) OUTPUT(0);
+   //if(!memcmp(x,y,p_len)) OUTPUT(0); 
    j = m;
    while (j+diff < n) {
       D = GRAM4(j);
@@ -115,14 +132,16 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
          while (D=(D<<1) & B[y[j-q]]) --j;
          j += mq;
          if (j == pos) {
-            for(i=m+1; i<p_len && x[i]==y[j-m+1+i]; i++);
+            for(i=m+1; i<p_len && x[i]==y[j-m+1+i]; i++){
+               nb_comparaisons++;
+            };
             if (i==p_len) OUTPUT(j-m+1);
             j+=shift;
          }
       }
       else j+=mMinusq;
    }
-	END_SEARCHING
+	//END_SEARCHING
    return count;
 }
 

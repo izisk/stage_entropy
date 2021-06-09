@@ -23,7 +23,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
    int i, j,k,s, count, hbc[SIGMA], shift;
@@ -32,7 +35,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    if (m>32) return search_large(x,m,y,n);   
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    for(i=0;i<SIGMA;i++) 
       hbc[i]=m;
    for(i=0;i<m;i++) 
@@ -48,12 +51,19 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       if(D & (1<<(m-1))) shift = j;
       D = (D<<1) & B[x[i]];
    }
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* Searching */      
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
-   if( !memcmp(x,y,m) ) OUTPUT(0);
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<m && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != m) OUTPUT(0);
+   //if( !memcmp(x,y,m) ) OUTPUT(0);
    i = m;
    while(i < n) {
       while( (k=hbc[y[i]])!=0 ) i+=k;
@@ -69,7 +79,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       }
       else i = j+m;
    }
-   END_SEARCHING   
+   //END_SEARCHING   
    return count;
 }
 
@@ -88,7 +98,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    int diff = p_len-m;
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    for(i=0;i<SIGMA;i++)
       hbc[i]=m;
    for(i=0;i<m;i++)
@@ -104,12 +114,19 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       if(D & (1<<(m-1))) shift = j;
       D = (D<<1) & B[x[i]];
    }
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* Searching */      
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
-   if( !memcmp(x,y,m) ) OUTPUT(0);
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<m && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != m) OUTPUT(0);
+   //if( !memcmp(x,y,m) ) OUTPUT(0);
    i = m;
    while(i+diff < n) {
       while( (k=hbc[y[i]])!=0 ) i+=k;
@@ -122,15 +139,17 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       if(j<s) {
          if(s<n) {
             k = m;
-            while(k<p_len && x[k]==y[s+k]) k++;
+            while(k<p_len && x[k]==y[s+k]) {
+               k++;
+               nb_comparaisons++;
+            }
             if(k==p_len && i+diff<n) OUTPUT(s);
          }
          i += shift;
       }
       else i = j+m;
    }
-   END_SEARCHING
-   
+   //END_SEARCHING
    return count;
 }
 

@@ -24,7 +24,10 @@
 
 #include <emmintrin.h>
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 typedef union{
    __m128i* data16;
@@ -47,7 +50,7 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
    T.data16 = (__m128i*) y;
    T.data = (unsigned char *) y;
 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    unsigned int K=7;
    unsigned int count=0;
    unsigned int i,last,j;
@@ -81,9 +84,9 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
          t->pos = i;
       }
    }
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count=0;
    ptr16 = &T.data16[last];
 
@@ -94,13 +97,20 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
          i = ((ptr16 - &T.data16[0])-last)*16;
          t = flist[filter];
          while(t) {
-            if (memcmp(x,&T.data[i+t->pos],Plen) == 0) count++;
+            //version du if en dessous afin de pouvoir incrementer nb_comparaisons
+            int cmpt = 0;
+            while(cmpt < Plen && (x[cmpt] == &T.data[i+t->pos][cmpt])){// probleme car impossible d'acceder a &T.data[i+t->pos][cmpt]
+               nb_comparaisons++;
+               cmpt++;
+            }
+            if (cmpt == Plen) count++;
+            //if (memcmp(x,&T.data[i+t->pos],Plen) == 0) count++;
             t=t->next;
          }
       }
       ptr16+=last;
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }
 

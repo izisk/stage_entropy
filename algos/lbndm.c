@@ -24,7 +24,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 int verify(unsigned char *y, int left, unsigned char *x, int m, int k) {
    int j,i;
@@ -32,7 +35,10 @@ int verify(unsigned char *y, int left, unsigned char *x, int m, int k) {
    for (j=0; j<k; j++) {
       if (m+j > left) break;
       i = 0;
-      while(i<m && y[i]==x[i]) i++;
+      while(i<m && y[i]==x[i]) {
+         i++;
+         nb_comparaisons++;
+      }
       if(i>=m) count++;
       y++;
    }
@@ -47,7 +53,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
    int i, j, l;
    int m1, m2, rmd;
 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    /* Preprocessing */
    M = 1 << (WORD-1);
    k = (m-1)/WORD+1;
@@ -57,9 +63,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
    for (i=m/k, l=m; i>0; i--, l-=k)
       for (j=k; j>0; j--)
          B[x[l-j]] |= 1 << (WORD-i);
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    /* Searching */
    int count = 0;
    j = 0;
@@ -80,6 +86,6 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
       }
       j += last;
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }

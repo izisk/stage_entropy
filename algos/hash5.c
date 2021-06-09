@@ -22,8 +22,11 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
 #define RANK5 5
+
+long long int nb_comparaisons;
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
    int count,i, j,sh, shift[WSIZE], sh1, mMinus1, mMinus4;
@@ -31,7 +34,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    if(m<5) return -1;
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    count = 0;
    mMinus1 = m-1;
    mMinus4 = m-4;
@@ -60,9 +63,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    sh1 = shift[h%WSIZE];
    shift[h%WSIZE] = 0;
    if(sh1==0) sh1=1;
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    i = mMinus1;
    memcpy(y+n, x, m);
    while (1) {
@@ -78,14 +81,18 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       }
       if (i < n) {
          j=0;
-         while(j<m && x[j]==y[i-mMinus1+j]) j++;
+         while(j<m && x[j]==y[i-mMinus1+j]) {
+            j++;
+            nb_comparaisons++;
+         }
+
          if (j>=m) {
             OUTPUT(i-mMinus1);
          }
          i+=sh1;
       }
       else {
-      	END_SEARCHING;
+      	//END_SEARCHING;
       	return count;
       }
    }

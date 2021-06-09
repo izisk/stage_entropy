@@ -23,7 +23,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 #define CHAR_BIT 8
 #define WORD_TYPE unsigned int
@@ -38,7 +41,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
    WORD_TYPE L[SIGMA] = {0};
    unsigned count = 0;
    
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    end = 0;
    for (k = 0; k < WORD_BITS-1; k++) {
       char occ[SIGMA] = {0};
@@ -72,9 +75,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
       beg = end;
       k++;
    }
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    j = m1-1;
    while (j < n) {
       int k = 1;
@@ -90,9 +93,16 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
          k++;
          if (D & M) {
             if (k == m1) {
-               if (!strncmp(x+m1, y+j+1, m-m1)) {
-                  count++;
+               //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+               int cmpt = 0;
+               while(cmpt<(m-m1) && (x+m1)[cmpt] == (y+j+1)[cmpt]){
+                  nb_comparaisons++;
+                  cmpt++;
                }
+               if (cmpt != m-m1) count++;
+               //if (!strncmp(x+m1, y+j+1, m-m1)) {
+               //   count++;
+               //}
                break;
             }
             l = k;
@@ -100,6 +110,6 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
       } while (D);
       j += m1-l;
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }

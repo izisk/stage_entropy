@@ -22,7 +22,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void preQsBc(unsigned char *x, int m, int qbc[]) {
    int i;
@@ -35,12 +38,16 @@ void preKmp(unsigned char *x, int m, int kmpNexy[]) {
    i = 0;
    j = kmpNexy[0] = -1;
    while (i < m) {
-      while (j > -1 && x[i] != x[j])
+      while (j > -1 && x[i] != x[j]) {
          j = kmpNexy[j];
+         nb_comparaisons;
+      }
       i++;
       j++;
-      if (i<m && x[i] == x[j])
+      if (i<m && x[i] == x[j]) {
          kmpNexy[i] = kmpNexy[j];
+         nb_comparaisons;
+      }
       else
          kmpNexy[i] = j;
    }
@@ -50,24 +57,30 @@ int search( unsigned char *x, int m, unsigned char *y, int n ) {
    int i, s, count, qsbc[SIGMA], kmp[XSIZE];
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    preQsBc(x,m,qsbc);
    preKmp(x,m,kmp);
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* Searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    s = 0;
    count = 0;
    while(s<=n-m) {
-      while(s<=n-m && x[m-1]!=y[s+m-1]) s+=qsbc[y[s+m]];
+      while(s<=n-m && x[m-1]!=y[s+m-1]) {
+         s+=qsbc[y[s+m]];
+         nb_comparaisons;
+      }
       if(s>n-m) return count;
       i=0; 
-      while(i<m && x[i]==y[s+i]) i++;
+      while(i<m && x[i]==y[s+i]) {
+         i++;
+         nb_comparaisons;
+      }
       if(i>=m) count++;
       s+=(i-kmp[i]);
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }
 

@@ -23,7 +23,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
    int a, b, i;
@@ -44,22 +47,26 @@ int search(unsigned char *x, int m, unsigned char *y, int n){
    int BrBc[SIGMA][SIGMA];
    unsigned char firstCh, lastCh;
 
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    count = 0;
    TVSBSpreBrBc(x, m, BrBc);
    firstCh = x[0];
    lastCh = x[m -1];
    for(i=0; i<m; i++) y[n+i]=y[n+m+i]=x[i];
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    while(j <= n - m){
       if(lastCh == y[j + m - 1] && firstCh == y[j]) {
-         for(i = m-2; i > 0 && x[i] == y[j + i]; i--);
+         nb_comparaisons++;
+         nb_comparaisons++;
+         for(i = m-2; i > 0 && x[i] == y[j + i]; i--){
+            nb_comparaisons++;
+         };
          if(i <= 0) count++;
       }
       j += BrBc[y[j + m]][y[j+m+1]];
    }
-   END_PREPROCESSING
+   //END_PREPROCESSING
    return count;
  }
