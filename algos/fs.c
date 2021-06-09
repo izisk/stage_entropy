@@ -23,7 +23,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
    int i, j, p, f[XSIZE];
@@ -48,25 +51,35 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    char ch = x[m-1];
 
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    for (a=0; a < SIGMA; a++) bc[a]=m;
    for (j=0; j < m; j++) bc[x[j]]=m-j-1;
    Pre_GS(x, m, gs);
    for(i=0; i<m; i++) y[n+i]=ch;
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* Searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
-   if( !memcmp(x,y,m) ) count++; 
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<m && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != m) count++;
+   //if( !memcmp(x,y,m) ) count++; 
    s=m;
    while(s<n) {
       while((k=bc[y[s]]))   s += k;
       j=2;
-      while (j<=m && x[m-j]==y[s-j+1]) j++;
+      while (j<=m && x[m-j]==y[s-j+1]) {
+         nb_comparaisons++;
+         j++;
+      }
       if( j>m && s<n) count++;
       s += gs[m-j+1];
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }

@@ -21,7 +21,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 void preBmBc(unsigned char *x, int m, int bmBc[]) {
    int i;
@@ -35,15 +38,15 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    int j, k, shift, bmBc[SIGMA], count;
  
    /* Preprocessing */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    preBmBc(x, m, bmBc);
    shift = bmBc[x[m - 1]];
    bmBc[x[m - 1]] = 0;
    memset(y + n, x[m - 1], m);
-   END_PREPROCESSING
+   //END_PREPROCESSING
  
    /* Searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
    j = 0;
    while (j <= n-m) {
@@ -53,11 +56,20 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
          j += k; k = bmBc[y[j + m -1]];
          j += k; k = bmBc[y[j + m -1]];
       }
-      if (memcmp(x, y + j, m - 1) == 0 && j <= n-m)
+      //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+      int cmpt = 0;
+      while(cmpt<(m-1) && x[cmpt] == (y+j)[cmpt]){
+         nb_comparaisons++;
+         cmpt++;
+      }
+      if (cmpt != (m-1) && j<= n-m) 
          if(j<=n-m) OUTPUT(j);
-      j += shift;                          
+      j += shift;
+      //if (memcmp(x, y + j, m - 1) == 0 && j <= n-m)
+      //   if(j<=n-m) OUTPUT(j);
+      //j += shift;                          
    }
-   END_SEARCHING
+   //END_SEARCHING
    return count;
 }
 

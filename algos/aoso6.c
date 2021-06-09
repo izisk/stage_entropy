@@ -22,7 +22,11 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
+
 #include "include/log2.h"
 
 void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q, unsigned int D, unsigned int mm, int *count) {
@@ -33,7 +37,10 @@ void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q, unsi
         s = LOG2(D); 
         c = -(m/q-1)*q-s/(m/q);
         k = 0; i=j+c;
-        if(i>=0 && i<=n-m) while(k<m && x[k]==y[i+k]) k++;
+        if(i>=0 && i<=n-m) while(k<m && x[k]==y[i+k]) {
+            k++;
+            nb_comparaisons++;
+        }
         if(k==m) (*count)++;
         D &= ~(1<<s);
     }
@@ -48,7 +55,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     if(m>32) return search_large(x,m,y,n,q);
 
     /* Preprocessing */
-    BEGIN_PREPROCESSING
+    //BEGIN_PREPROCESSING
     for (i = 0; i < SIGMA; ++i) B[i] = ~0; 
     h = mm = 0;
     for (j = 0; j < q; ++j) {
@@ -59,9 +66,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
         }
         mm |= (1<<(h-1));
     }
-    END_PREPROCESSING
+    //END_PREPROCESSING
 
-    BEGIN_SEARCHING
+    //BEGIN_SEARCHING
     /* Searching */
     count = 0;
     D = ~0;
@@ -72,7 +79,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
             verify(y, j, n, x, m, q, D, mm, &count);
         j += q;
     }
-    END_SEARCHING
+    //END_SEARCHING
     return count;
 }
 
@@ -90,7 +97,10 @@ void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m, int q
         s = LOG2(D);
         c = -(m/q-1)*q-s/(m/q);
         k = 0; i=j+c;
-        if(i>=0 && i<=n-p_len) while(k<p_len && x[k]==y[i+k]) k++;
+        if(i>=0 && i<=n-p_len) while(k<p_len && x[k]==y[i+k]) {
+            k++;
+            nb_comparaisons++;
+        }
         if(k==p_len) (*count)++;
         D &= ~(1<<s);
     }
@@ -102,7 +112,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
     p_len = m;
     m = 32;
 
-    BEGIN_PREPROCESSING
+    //BEGIN_PREPROCESSING
     /* Preprocessing */
     for (i = 0; i < SIGMA; ++i) B[i] = ~0; 
     h = mm = 0;
@@ -114,9 +124,9 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
         }
         mm |= (1<<(h-1));
     }
-    END_PREPROCESSING
+    //END_PREPROCESSING
 
-    BEGIN_SEARCHING
+    //BEGIN_SEARCHING
     /* Searching */
     count = 0;
     D = ~0;
@@ -127,6 +137,6 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
             verify_large(y, j, n, x, m, q, D, mm, &count, p_len);
         j += q;
     }
-    END_SEARCHING
+    //END_SEARCHING
     return count;
 }

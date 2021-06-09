@@ -23,7 +23,10 @@
  */
 
 #include "include/define.h"
-#include "include/main.h"
+//#include "include/main.h"
+#include <string.h>
+
+long long int nb_comparaisons;
 
 typedef struct GRASPmList {
    int k;
@@ -42,7 +45,7 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
    int i,j,k,count,first, hbc[SIGMA];
 
    /* Preprocessing of the list */
-   BEGIN_PREPROCESSING
+   //BEGIN_PREPROCESSING
    for(i=0; i<SIGMA; i++) z[i]=NULL;
    if (p[0] == p[m-1]) for(i=0; i<SIGMA; i++) ADD_LIST(&z[i], 0);
    for(i=0; i<m-1;i++) if (p[i+1] == p[m-1]) ADD_LIST(&z[p[i]],(i+1));
@@ -50,10 +53,10 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
    for(i=0;i<SIGMA;i++) hbc[i]=m;
    for(i=0;i<m;i++) hbc[p[i]]=m-i-1;
    for(i=0;i<m;i++) t[n+i]=p[i];
-   END_PREPROCESSING
+   //END_PREPROCESSING
 
    /* searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    count = 0;
    j = m-1;
    while (j<n) {
@@ -62,13 +65,16 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
          while(pos!=NULL) { 
             k = pos->k;
             i = 0; first = j-k;                 
-            while(i<m && p[i]==t[first+i]) i++;
+            while(i<m && p[i]==t[first+i]) {
+               i++;
+               nb_comparaisons++;
+            }
             if(i==m && first<=n-m) count++;
             pos = pos->next;
          }
       }
       j+=m;
    }
-   END_SEARCHING
+  // END_SEARCHING
    return count;
 }
