@@ -77,7 +77,7 @@ int knuth_morris_pratt(unsigned char * texte,unsigned char * motif,int n,int m){
   int occ=0;
   table_bord=kmp_bord(motif,m);
   while(i<=(n-m+j)){
-    while(j<m &&comparer_lettre(texte[i],motif[j])){
+    while(j<m && comparer_lettre(texte[i],motif[j])){
       i++;
       j++;
     }

@@ -130,7 +130,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    //END_PREPROCESSING
 
    /* Searching */
-   BEGIN_SEARCHING
+   //BEGIN_SEARCHING
    //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
    int cmpt = 0;
    while(cmpt<p_len && x[cmpt] == y[cmpt]){

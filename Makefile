@@ -78,6 +78,15 @@ graspm: algos/graspm.o entropy.o text/text_generator.o text/benchmarks.o
 lbndm: algos/lbndm.o entropy.o text/text_generator.o text/benchmarks.o
 	gcc $(CFLAGS) algos/lbndm.o entropy.o text/text_generator.o text/benchmarks.o -o lbndm -lm
 
+naif_xp_papi: text/naif_xp_papi.o entropy.o text/text_generator.o text/text_algorithm.o
+	gcc $(CFLAGS) text/naif_xp_papi.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp_papi -lm
+
+ag_papi: algos/ag.o entropy.o text/text_generator.o text/benchmarks_papi.o
+	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks_papi.o -o ag_papi -lm
+
+kmp2: algos/kmp.o entropy.o text/text_generator.o text/benchmarks_papi.o
+	gcc $(CFLAGS) algos/kmp.o entropy.o text/text_generator.o text/benchmarks_papi.o -o kmp2_papi -lm
+
 
 clean:
 	rm *.o text/*.o

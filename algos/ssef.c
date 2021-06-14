@@ -53,7 +53,7 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
    //BEGIN_PREPROCESSING
    unsigned int K=7;
    unsigned int count=0;
-   unsigned int i,last,j;
+   unsigned int i, last, j;
    __m128i *ptr16;
    __m128i *lastchunk = &T.data16[Tlen/16];
    unsigned int filter;
@@ -99,7 +99,7 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
          while(t) {
             //version du if en dessous afin de pouvoir incrementer nb_comparaisons
             int cmpt = 0;
-            while(cmpt < Plen && (x[cmpt] == &T.data[i+t->pos][cmpt])){// probleme car impossible d'acceder a &T.data[i+t->pos][cmpt]
+            while(cmpt < Plen && (x[cmpt] == *&T.data[i+t->pos+cmpt])){// probleme ici
                nb_comparaisons++;
                cmpt++;
             }

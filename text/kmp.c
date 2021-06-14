@@ -34,6 +34,11 @@ int main(int argc, char ** argv){
     double tempsmoyen;
     
     create_alphabet(alphabet, alphabet_size);
+
+    for(int n = 200; n <= text_size; n += 100){
+
+    for(int m = 10; m <= pattern_size; m += 10){
+
     for(target = 0.001; target <= (log2(alphabet_size)-0.2); target +=0.01){
       	nb_comparaisons = 0;
         tempsmoyen = 0;
@@ -44,16 +49,18 @@ int main(int argc, char ** argv){
 
 	  if(i % 100 == 0)
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
-	  text_generator(text, distribution, alphabet, alphabet_size, text_size);
-	  text_generator(pattern, distribution, alphabet, alphabet_size, pattern_size);
-	  knuth_morris_pratt(text, pattern, text_size, pattern_size);
+	  text_generator(text, distribution, alphabet, alphabet_size, n);
+	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
+	  knuth_morris_pratt(text, pattern, n, m);
 
     //temps fin
     temps_fin = clock();
     temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
     tempsmoyen+=temps;
 	}
-	printf("%Lg %Lg %f\n", target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+	printf("%d %d %Lg %Lg %f\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+    }
+    }
     }
     return EXIT_SUCCESS;
 }

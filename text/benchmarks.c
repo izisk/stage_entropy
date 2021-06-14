@@ -14,50 +14,57 @@ void create_alphabet(char * alphabet, int size){
 }
 
 int main(int argc, char ** argv){
-    srand(time(NULL));
-    if(argc != 4){
-        perror("./a.out text_size pattern_size alphabet_size");
-        return EXIT_FAILURE;
-    }
-    int text_size = atoi(argv[1]);
-    int pattern_size = atoi(argv[2]);
-    int alphabet_size = atoi(argv[3]);
-    long double target;
-    long double distribution[alphabet_size];
-    unsigned char text[text_size];
-    unsigned char pattern[pattern_size];
-    char alphabet[alphabet_size];    
-    int i;
-    int nb_experiment = 10000;
-    clock_t temps_deb, temps_fin;
-    double temps;
-    double tempsmoyen;
+  srand(time(NULL));
+  if(argc != 4){
+      perror("./a.out text_size pattern_size alphabet_size");
+      return EXIT_FAILURE;
+  }
+  int text_size = atoi(argv[1]);
+  int pattern_size = atoi(argv[2]);
+  int alphabet_size = atoi(argv[3]);
+  long double target;
+  long double distribution[alphabet_size];
+  unsigned char text[text_size];
+  unsigned char pattern[pattern_size];
+  char alphabet[alphabet_size];    
+  int i;
+  int nb_experiment = 10000;
+  clock_t temps_deb, temps_fin;
+  double temps;
+  double tempsmoyen;
 
     
-    create_alphabet(alphabet, alphabet_size);
-    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
-      	nb_comparaisons = 0;
+  create_alphabet(alphabet, alphabet_size);
+
+  for(int n = 200; n <= text_size; n += 100){
+
+    for(int m = 10; m <= pattern_size; m += 10){
+
+      for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
+        nb_comparaisons = 0;
         tempsmoyen = 0;
 
-	for(i = 0; i < nb_experiment; i++){
-    //temps debut
-    temps_deb = clock();
-  
-	  if(i % 100 == 0)
-	    random_distribution_generator(distribution, target, alphabet_size, 1000);
-	  text_generator(text, distribution, alphabet, alphabet_size, text_size);
-	  text_generator(pattern, distribution, alphabet, alphabet_size, pattern_size);
-	  search(pattern, pattern_size, text, text_size);
+        for(i = 0; i < nb_experiment; i++){
 
-    //temps fin
-    temps_fin = clock();
-    temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
-    tempsmoyen+=temps;
-	}
-  tempsmoyen = tempsmoyen/nb_experiment;
+          //temps debut
+          temps_deb = clock();
+        
+          if(i % 100 == 0)
+            random_distribution_generator(distribution, target, alphabet_size, 1000);
+          text_generator(text, distribution, alphabet, alphabet_size, n);
+          text_generator(pattern, distribution, alphabet, alphabet_size, m);
+          search(pattern, m, text, n);
 
-	printf("%Lg %Lg %f\n", target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
-	
+          //temps fin
+          temps_fin = clock();
+          temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
+          tempsmoyen+=temps;
+        }
+        tempsmoyen = tempsmoyen/nb_experiment;
+
+        printf("%d %d %Lg %Lg %f\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+      }
     }
-    return EXIT_SUCCESS;
+  }
+  return EXIT_SUCCESS;
 }

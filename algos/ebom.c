@@ -75,7 +75,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       p = FT[y[j]][y[j-1]];
       while ( (p = trans[p][y[i]]) != UNDEFINED ) {
          i--;
-         nb_comparaisons; //pas sir
+         nb_comparaisons++; //pas sir
       }
       if (i < j-mMinus1 && j<n) {
          count++;
