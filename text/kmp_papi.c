@@ -32,26 +32,6 @@ int set_PAPI(){
   return eventSet;
 }
 
-long double collision_probability(long double * t, int n){
-    long double ent = 0;
-    int i;
-    for(i = 0; i < n; i++)
-        ent += t[i]*t[i];
-    return ent;
-}
-
-
-long double expected_cmp_number(long double * distribution, int alphabet_size,
-				int pattern_size){
-  int cmp;
-  long double collision_pr = collision_probability(distribution, alphabet_size);
-  long double pow_ent = 1;
-  long double result = 0;
-  for(cmp = 0; cmp < pattern_size; cmp++, pow_ent *= collision_pr)
-    result += (cmp+1) * pow_ent * (1 - collision_pr);
-  result += cmp * pow_ent;
-  return result;
-}
 
 void create_alphabet(char * alphabet, int size){
   int i;
@@ -77,32 +57,34 @@ int main(int argc, char ** argv){
     int nb_experiment = 10000;
     long long values[PAPI_events_number];
 
-    
+
     create_alphabet(alphabet, alphabet_size);
 
     for(int n = 200; n <= text_size; n += 100){
 
-    for(int m = 10; m <= pattern_size; m += 10){ 
+    for(int m = 10; m <= pattern_size; m += 10){
 
-    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
+    for(target = 0.001; target <= (log2(alphabet_size)-0.2); target +=0.01){
       	nb_comparaisons = 0;
         tempsmoyen = 0;
 
 	for(i = 0; i < nb_experiment; i++){
-  
+
+
 	  if(i % 100 == 0)
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, n);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
       if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
           ERROR_RETURN(retval);
-	  algorithme_naif(text, pattern, n, m);
+	  knuth_morris_pratt(text, pattern, n, m);
       if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
           ERROR_RETURN(retval);
 
-	}
 
-	printf("%d %d %Lg %Lg %f %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/long double)(nb_experiment), values[1]/long double)(nb_experiment));
+
+	}
+	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/long double)(nb_experiment), values[1]/long double)(nb_experiment));
     }
     }
     }

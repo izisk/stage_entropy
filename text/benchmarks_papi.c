@@ -8,13 +8,13 @@
 #include"text_generator.h"
 #include"benchmarks.h"
 
-#define PAPI_events_number 1
+#define PAPI_events_number 2
 #define ERROR_RETURN(retval) { fprintf(stderr, "Error %d, %s, %s:line %d: \n", retval, PAPI_strerror(retval), __FILE__,__LINE__);  exit(retval); }
 
 int set_PAPI(){
   int eventSet = PAPI_NULL;
   int retval;
-  int events[PAPI_events_number] = {PAPI_BR_MSP};
+  int events[PAPI_events_number] = {PAPI_TOT_INS, PAPI_BR_MSP};
   int i;
 
   /* We use number to keep track of the number of events in the eventSet */ 
@@ -55,9 +55,6 @@ int main(int argc, char ** argv){
     char alphabet[alphabet_size];    
     int i;
     int nb_experiment = 10000;
-    clock_t temps_deb, temps_fin;
-    double temps;
-    double tempsmoyen;
     int n, m;
     long long values[PAPI_events_number];
 
@@ -73,8 +70,6 @@ int main(int argc, char ** argv){
         tempsmoyen = 0;
 
 	for(i = 0; i < nb_experiment; i++){
-    //temps debut
-    temps_deb = clock();
   
 	  if(i % 100 == 0)
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
@@ -86,14 +81,9 @@ int main(int argc, char ** argv){
     if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
           ERROR_RETURN(retval);
 
-    //temps fin
-    temps_fin = clock();
-    temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
-    tempsmoyen+=temps;
 	}
-  tempsmoyen = tempsmoyen/nb_experiment;
 
-	printf("%d %d %Lg %Lg %f, %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen, values[0]);
+	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/long double)(nb_experiment), values[1]/long double)(nb_experiment));
 	
     }
 

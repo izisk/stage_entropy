@@ -99,7 +99,7 @@ int  search(unsigned char* x, int Plen, unsigned char *y, int Tlen) {
          while(t) {
             //version du if en dessous afin de pouvoir incrementer nb_comparaisons
             int cmpt = 0;
-            while(cmpt < Plen && (x[cmpt] == *&T.data[i+t->pos+cmpt])){// probleme ici
+            while(cmpt < Plen && (x[cmpt] == T.data[i+t->pos+cmpt])){// probleme ici
                nb_comparaisons++;
                cmpt++;
             }
