@@ -57,8 +57,12 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    while (j < n) {
       D = (B[y[j+1]]<<1) & B[y[j]];
       if (D != 0) {
+         nb_comparaisons++;
          pos = j;
-         while (D=(D<<1) & B[y[j-1]]) --j;
+         while (D=(D<<1) & B[y[j-1]]) {
+            --j;
+            nb_comparaisons++;
+         }
          j += mMinus1;
          if (j == pos) {
             OUTPUT(j);
@@ -107,8 +111,12 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    while (j < n) {
       D = (B[y[j+1]]<<1) & B[y[j]];
       if (D != 0) {
+         nb_comparaisons++;
          pos = j;
-         while (D=(D<<1) & B[y[j-1]]) --j;
+         while (D=(D<<1) & B[y[j-1]]) {
+            --j;
+            nb_comparaisons++;
+         }
          j += mMinus1;
          if (j == pos) {
             k = m; s=j-mMinus1;

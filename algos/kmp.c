@@ -57,9 +57,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    count = 0;
    i = j = 0;
    while (j < n) {
-      while (i > -1 && x[i] != y[j])
+      while (i > -1 && x[i] != y[j]){
          nb_comparaisons++;
          i = kmpNext[i];
+      }
       i++;
       j++;
       if (i >= m) {

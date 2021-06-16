@@ -40,13 +40,13 @@ void preKmp(unsigned char *x, int m, int kmpNexy[]) {
    while (i < m) {
       while (j > -1 && x[i] != x[j]) {
          j = kmpNexy[j];
-         nb_comparaisons;
+         nb_comparaisons++;
       }
       i++;
       j++;
       if (i<m && x[i] == x[j]) {
          kmpNexy[i] = kmpNexy[j];
-         nb_comparaisons;
+         nb_comparaisons++;
       }
       else
          kmpNexy[i] = j;
@@ -69,13 +69,13 @@ int search( unsigned char *x, int m, unsigned char *y, int n ) {
    while(s<=n-m) {
       while(s<=n-m && x[m-1]!=y[s+m-1]) {
          s+=qsbc[y[s+m]];
-         nb_comparaisons;
+         nb_comparaisons++;
       }
       if(s>n-m) return count;
       i=0; 
       while(i<m && x[i]==y[s+i]) {
          i++;
-         nb_comparaisons;
+         nb_comparaisons++;
       }
       if(i>=m) count++;
       s+=(i-kmp[i]);

@@ -53,7 +53,11 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    count = 0;
    for (D = 0, j = 0; j < n; ++j) { 
       D = ((D<<1) | 1) & S[y[j]]; 
-      if (D & F) OUTPUT(j - m + 1); 
+      if (D & F) {
+         OUTPUT(j - m + 1);
+         nb_comparaisons++;
+      }
+
    } 
    //END_SEARCHING
    return count;
@@ -85,6 +89,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    for (D = 0, j = 0; j < n; ++j) { 
       D = ((D<<1)|1) & S[y[j]]; 
       if (D & F) {
+         nb_comparaisons++;
          k = 0;
          h = j-m+1;
          while(k<p_len && x[k]==y[h+k]) {

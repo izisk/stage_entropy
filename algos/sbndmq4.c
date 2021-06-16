@@ -68,8 +68,12 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
    while (j < n) {
       D = GRAM4(j);
       if (D != 0) {
+         nb_comparaisons++;
          pos = j;
-         while (D=(D<<1) & B[y[j-q]]) --j;
+         while (D=(D<<1) & B[y[j-q]]){
+            --j;
+            nb_comparaisons++;
+         } 
          j += mq;
          if (j == pos) {
             OUTPUT(j);
@@ -128,8 +132,12 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    while (j+diff < n) {
       D = GRAM4(j);
       if (D != 0) {
+         nb_comparaisons++;
          pos = j;
-         while (D=(D<<1) & B[y[j-q]]) --j;
+         while (D=(D<<1) & B[y[j-q]]) {
+            --j;
+            nb_comparaisons++;
+         }
          j += mq;
          if (j == pos) {
             for(i=m+1; i<p_len && x[i]==y[j-m+1+i]; i++){

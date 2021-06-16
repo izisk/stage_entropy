@@ -86,12 +86,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
       WORD_TYPE D = ~0;
       WORD_TYPE D_;
       do {
+         nb_comparaisons++;
          D = D & B[c][y[j-k]];
          D_ = D & L[c];
          D += D_;
          c = y[j-k];
          k++;
          if (D & M) {
+            nb_comparaisons++;
             if (k == m1) {
                //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
                int cmpt = 0;

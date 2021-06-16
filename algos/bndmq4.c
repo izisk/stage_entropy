@@ -63,9 +63,11 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       while (i <= n - q) {
          D = GRAM4(i);
          if (D != 0) {
+            nb_comparaisons++;
             j = i;
             first = i - (m - q);
                do {
+                  nb_comparaisons++;
                   if ( D >= M ) {
                      if (j > first) i = j-1;
                      else OUTPUT(first);
@@ -120,9 +122,11 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
    while (i <= n - q) {
       D = GRAM4(i);
       if (D != 0) {
+         nb_comparaisons++;
          j = i;
          first = i - (m - q);
          do {
+            nb_comparaisons++;
             if ( D >= M ) {
                if (j > first) i = j-1;
                else {
