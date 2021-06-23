@@ -24,8 +24,8 @@ int main(int argc, char ** argv){
   int alphabet_size = atoi(argv[3]);
   long double target;
   long double distribution[alphabet_size];
-  unsigned char text[text_size];
-  unsigned char pattern[pattern_size];
+  unsigned char * text = malloc(sizeof(char) * (text_size + pattern_size + 1));
+  unsigned char * pattern = malloc(sizeof(char) * (pattern_size + 1));
   char alphabet[alphabet_size];    
   int i;
   int nb_experiment = 10000;
@@ -66,5 +66,9 @@ int main(int argc, char ** argv){
       }
     }
   }
+
+  free(text);
+  free(pattern);
+
   return EXIT_SUCCESS;
 }

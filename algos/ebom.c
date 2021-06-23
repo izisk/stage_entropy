@@ -63,7 +63,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
    //BEGIN_SEARCHING
    for(i=0; i<m; i++) y[n+i]=x[i];
-   if( !memcmp(x,y,m) ) count++;
+   //remplacement du if en commentaire afin de pouvoir incrementer le nb_comparaisons
+   int cmpt = 0;
+   while(cmpt<m && x[cmpt] == y[cmpt]){
+      nb_comparaisons++;
+      cmpt++;
+   }
+   if (cmpt != m) count++;
+   //if( !memcmp(x,y,m) ) count++;
    j=m;
    mMinus1 = m-1;
    while (j<n) {
