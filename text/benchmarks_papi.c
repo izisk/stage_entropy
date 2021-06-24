@@ -15,6 +15,8 @@ int set_PAPI(){
   int eventSet = PAPI_NULL;
   int retval;
   int events[PAPI_events_number] = {PAPI_TOT_INS, PAPI_BR_MSP};
+    //{PAPI_TOT_INS, PAPI_L3_TCA, PAPI_L3_TCM, PAPI_L2_TCA, PAPI_L2_TCM, PAPI_L1_TCA, PAPI_L1_TCM, PAPI_BR_INS, PAPI_BR_MSP, PAPI_BR_PRC};
+
   int i;
 
   /* We use number to keep track of the number of events in the eventSet */ 
@@ -57,6 +59,7 @@ int main(int argc, char ** argv){
     int nb_experiment = 10000;
     int n, m;
     long long values[PAPI_events_number];
+    int eventSet = set_PAPI();
 
     
     create_alphabet(alphabet, alphabet_size);
@@ -67,7 +70,6 @@ int main(int argc, char ** argv){
 
     for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
-        tempsmoyen = 0;
 
 	for(i = 0; i < nb_experiment; i++){
   
@@ -83,7 +85,7 @@ int main(int argc, char ** argv){
 
 	}
 
-	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/long double)(nb_experiment), values[1]/long double)(nb_experiment));
+	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
 	
     }
 
