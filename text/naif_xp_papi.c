@@ -103,7 +103,7 @@ int main(int argc, char ** argv){
 
 	}
 
-	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
+	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
     }
     }
     }
