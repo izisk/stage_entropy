@@ -76,6 +76,7 @@ int main(int argc, char ** argv){
     int i;
     int nb_experiment = 10000;
     long long values[PAPI_events_number];
+    int retval;
     int eventSet = set_PAPI();
 
     
@@ -102,7 +103,7 @@ int main(int argc, char ** argv){
 
 	}
 
-	printf("%d %d %Lg %Lg %f %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
+	printf("%d %d %Lg %Lg %lld %lld\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
     }
     }
     }

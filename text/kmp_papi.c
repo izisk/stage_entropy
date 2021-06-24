@@ -56,6 +56,7 @@ int main(int argc, char ** argv){
     int i;
     int nb_experiment = 10000;
     long long values[PAPI_events_number];
+    int retval;
     int eventSet = set_PAPI();
 
 
