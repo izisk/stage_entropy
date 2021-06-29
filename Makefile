@@ -155,7 +155,7 @@ tvsbs_papi: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o
 
 
 clean:
-	rm *.o text/*.o
+	rm *.o text/*.o algos/*.o
 	rm -f random_distribution
 	rm -f naif_xp
 	rm -f kmp
