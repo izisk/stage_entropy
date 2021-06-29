@@ -25,6 +25,7 @@
 #include "include/define.h"
 //#include "include/main.h"
 #include <string.h>
+#include <stdlib.h>
 
 long long int nb_comparaisons;
 
