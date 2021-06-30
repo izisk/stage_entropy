@@ -64,6 +64,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       i++;
       j++;
       if (i >= m) {
+         nb_comparaisons++;
          OUTPUT(j - i);
          i = kmpNext[i];
       }

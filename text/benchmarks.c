@@ -30,8 +30,8 @@ int main(int argc, char ** argv){
   int i;
   int nb_experiment = 10000;
   clock_t temps_deb, temps_fin;
-  double temps;
-  double tempsmoyen;
+  long double temps;
+  long double tempsmoyen;
 
     
   create_alphabet(alphabet, alphabet_size);
@@ -57,12 +57,12 @@ int main(int argc, char ** argv){
 
           //temps fin
           temps_fin = clock();
-          temps=(double)(temps_fin - temps_deb)/(double)CLOCKS_PER_SEC;
+          temps=(long double)(temps_fin - temps_deb)/(long double)CLOCKS_PER_SEC;
           tempsmoyen+=temps;
         }
         tempsmoyen = tempsmoyen/nb_experiment;
 
-        printf("%d %d %Lg %Lg %f\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+        printf("%d %d %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
       }
     }
   }
