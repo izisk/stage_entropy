@@ -3,6 +3,10 @@ CFLAGS = -Wall -O3
 
 all:random_distribution	
 
+algos: naif_xp kmp kmp2 ag aoso2 aoso6 bmh-sbndm bndmq4 ebom fjs fs fsbndm graspm hash3 hash5 hash8 kbndm lbndm sa sbndm-bmh sbndmq4 ssef tunedbm tvsbs
+
+algos_papi: naif_xp_papi kmp_papi kmp2_papi ag_papi aoso2_papi aoso6_papi bmh-sbndm_papi bndmq4_papi ebom_papi fjs_papi fs_papi fsbndm_papi graspm_papi hash3_papi hash5_papi hash8_papi kbndm_papi lbndm_papi sa_papi sbndm-bmh_papi sbndmq4_papi ssef_papi tunedbm_papi tvsbs_papi
+
 random_distribution: random_distribution.o entropy.o
 	gcc $(CFLAGS) random_distribution.o entropy.o -o random_distribution -lm
 
