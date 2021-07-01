@@ -76,7 +76,7 @@ int main(int argc, char ** argv){
 
     //temps fin
     temps_fin = clock();
-    temps=(long double)(temps_fin - temps_deb);
+    temps=(long double)(temps_fin - temps_deb)/(long double)CLOCKS_PER_SEC;
     tempsmoyen+=temps;
 	}
   tempsmoyen = tempsmoyen/nb_experiment;
