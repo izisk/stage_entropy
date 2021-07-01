@@ -45,14 +45,14 @@ int main(int argc, char ** argv){
         tempsmoyen = 0;
 
         for(i = 0; i < nb_experiment; i++){
-
-          //temps debut
-          temps_deb = clock();
         
           if(i % 100 == 0)
             random_distribution_generator(distribution, target, alphabet_size, 1000);
           text_generator(text, distribution, alphabet, alphabet_size, n);
           text_generator(pattern, distribution, alphabet, alphabet_size, m);
+          //temps debut
+          temps_deb = clock();
+          
           search(pattern, m, text, n);
 
           //temps fin
