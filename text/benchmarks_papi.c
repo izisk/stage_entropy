@@ -52,8 +52,8 @@ int main(int argc, char ** argv){
   int alphabet_size = atoi(argv[3]);
   long double target;
   long double distribution[alphabet_size];
-  unsigned char text[text_size];
-  unsigned char pattern[pattern_size];
+  unsigned char * text = malloc(sizeof(char) * (text_size + pattern_size + 1));
+  unsigned char * pattern = malloc(sizeof(char) * (pattern_size + 1));
   char alphabet[alphabet_size];    
   int i;
   int nb_experiment = 10000;
@@ -67,35 +67,39 @@ int main(int argc, char ** argv){
 
   for(n = 200; n <= text_size; n += 100){
 
-    for(m = 10; n <= pattern_size; n += 10){
+    for(m = 10; m <= pattern_size; m += 10){
 
       for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
-	nb_instructions = 0;
-	nb_branch_fault = 0;
+	      nb_instructions = 0;
+	      nb_branch_fault = 0;
 
-	for(i = 0; i < nb_experiment; i++){
+	      for(i = 0; i < nb_experiment; i++){
   
-	  if(i % 100 == 0)
-	    random_distribution_generator(distribution, target, alphabet_size, 1000);
-	  text_generator(text, distribution, alphabet, alphabet_size, n);
-	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
-	  if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
-	    ERROR_RETURN(retval);
-	  search(pattern, m, text, n);
-	  if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
-	    ERROR_RETURN(retval);
-	  
-	  nb_instructions += values[0];
-	  nb_branch_fault += values[1];
-	}
+        if(i % 100 == 0)
+          random_distribution_generator(distribution, target, alphabet_size, 1000);
+        text_generator(text, distribution, alphabet, alphabet_size, n);
+        text_generator(pattern, distribution, alphabet, alphabet_size, m);
+        if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
+          ERROR_RETURN(retval);
+        search(pattern, m, text, n);
+        if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
+          ERROR_RETURN(retval);
+        
+        nb_instructions += values[0];
+        nb_branch_fault += values[1];
+	      }
 
-	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
+	      printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
 	
       }
 
     }
 
   }
+
+  free(text);
+  free(pattern);
+
   return EXIT_SUCCESS;
 }
