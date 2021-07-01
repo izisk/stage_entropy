@@ -45,13 +45,13 @@ int main(int argc, char ** argv){
 
 	for(i = 0; i < nb_experiment; i++){
 
-	  if(i % 100 == 0)
-	    random_distribution_generator(distribution, target, alphabet_size, 1000);
+
+	  random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, n);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
      //temps debut
     temps_deb = clock();
-    
+
 	  knuth_morris_pratt(text, pattern, n, m);
 
     //temps fin
