@@ -42,35 +42,37 @@ void create_alphabet(char * alphabet, int size){
 }
 
 int main(int argc, char ** argv){
-    srand(time(NULL));
-    if(argc != 4){
-        perror("./a.out text_size pattern_size alphabet_size");
-        return EXIT_FAILURE;
-    }
-    int text_size = atoi(argv[1]);
-    int pattern_size = atoi(argv[2]);
-    int alphabet_size = atoi(argv[3]);
-    long double target;
-    long double distribution[alphabet_size];
-    unsigned char text[text_size];
-    unsigned char pattern[pattern_size];
-    char alphabet[alphabet_size];    
-    int i;
-    int nb_experiment = 10000;
-    int n, m;
-    long long values[PAPI_events_number];
-    int retval;
-    int eventSet = set_PAPI();
-
+  srand(time(NULL));
+  if(argc != 4){
+    perror("./a.out text_size pattern_size alphabet_size");
+    return EXIT_FAILURE;
+  }
+  int text_size = atoi(argv[1]);
+  int pattern_size = atoi(argv[2]);
+  int alphabet_size = atoi(argv[3]);
+  long double target;
+  long double distribution[alphabet_size];
+  unsigned char text[text_size];
+  unsigned char pattern[pattern_size];
+  char alphabet[alphabet_size];    
+  int i;
+  int nb_experiment = 10000;
+  int n, m;
+  long long values[PAPI_events_number];
+  int retval;
+  int eventSet = set_PAPI();
+  long long int nb_instructions, nb_branch_fault;
     
-    create_alphabet(alphabet, alphabet_size);
+  create_alphabet(alphabet, alphabet_size);
 
   for(n = 200; n <= text_size; n += 100){
 
-  for(m = 10; n <= pattern_size; n += 10){
+    for(m = 10; n <= pattern_size; n += 10){
 
-    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
+      for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
+	nb_instructions = 0;
+	nb_branch_fault = 0;
 
 	for(i = 0; i < nb_experiment; i++){
   
@@ -78,20 +80,22 @@ int main(int argc, char ** argv){
 	    random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, n);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
-    if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
-          ERROR_RETURN(retval);
+	  if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
+	    ERROR_RETURN(retval);
 	  search(pattern, m, text, n);
-    if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
-          ERROR_RETURN(retval);
-
+	  if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
+	    ERROR_RETURN(retval);
+	  
+	  nb_instructions += values[0];
+	  nb_branch_fault += values[1];
 	}
 
-	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), values[0]/(long double)(nb_experiment), values[1]/(long double)(nb_experiment));
+	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
 	
+      }
+
     }
 
   }
-
-  }
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
