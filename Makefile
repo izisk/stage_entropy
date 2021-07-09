@@ -153,6 +153,9 @@ tvsbs_papi: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o
 	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o -o tvsbs_papi -lm -lpapi
 
 
+ag1: algos/ag.o Textes/benchmarks_ch21.o
+	gcc $(CFLAGS) algos/ag.o Textes/benchmarks_ch21.o -o ag1 -lm
+
 
 clean:
 	rm *.o text/*.o algos/*.o

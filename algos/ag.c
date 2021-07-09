@@ -27,14 +27,14 @@
 
 long long int nb_comparaisons;
 
-void preBmBc(unsigned char *x, int m, int bmBc[]) {
+void preBmBc(char *x, int m, int bmBc[]) {
     int i;
     for (i = 0; i < SIGMA; ++i) bmBc[i] = m;
     for (i = 0; i < m - 1; ++i) bmBc[x[i]] = m - i - 1;
 }
  
  
-void suffixes(unsigned char *x, int m, int *suff) {
+void suffixes(char *x, int m, int *suff) {
     int f, g, i;
     suff[m - 1] = m;
     g = m - 1;
@@ -53,7 +53,7 @@ void suffixes(unsigned char *x, int m, int *suff) {
     }
 }
 
-void preBmGsAG(unsigned char *x, int m, int bmGs[], int suff[]) {
+void preBmGsAG(char *x, int m, int bmGs[], int suff[]) {
     int i, j;
     suffixes(x, m, suff);
     for (i = 0; i < m; ++i) bmGs[i] = m;
@@ -69,7 +69,7 @@ void preBmGsAG(unsigned char *x, int m, int bmGs[], int suff[]) {
 
 
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int search(char *x, int m, char *y, int n) {
     int i, j, k, s, shift, count;
     int bmGs[XSIZE], skip[XSIZE], suff[XSIZE], bmBc[SIGMA];
   
