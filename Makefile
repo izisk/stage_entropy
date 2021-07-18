@@ -12,8 +12,11 @@ algos_langnat: naif_xp_langnat kmp_langnat kmp2_langnat ag_langnat aoso2_langnat
 algos_papi_langnat: naif_xp_papi_langnat kmp_papi_langnat kmp2_papi_langnat ag_papi_langnat aoso2_papi_langnat aoso6_papi_langnat bmh-sbndm_papi_langnat bndmq4_papi_langnat ebom_papi_langnat fjs_papi_langnat fs_papi_langnat fsbndm_papi_langnat graspm_papi_langnat hash3_papi_langnat hash5_papi_langnat hash8_papi_langnat kbndm_papi_langnat lbndm_papi_langnat sa_papi_langnat sbndm-bmh_papi_langnat sbndmq4_papi_langnat ssef_papi_langnat tunedbm_papi_langnat tvsbs_papi_langnat
 
 
+
 random_distribution: random_distribution.o entropy.o
 	gcc $(CFLAGS) random_distribution.o entropy.o -o random_distribution -lm
+
+
 
 naif_xp: text/naif_xp.o entropy.o text/text_generator.o text/text_algorithm.o
 	gcc $(CFLAGS) text/naif_xp.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp -lm
@@ -162,6 +165,7 @@ tvsbs_papi: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o
 	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o -o tvsbs_papi -lm -lpapi
 
 
+
 naif_xp_langnat: Textes/naif_xp_langnat.o text/text_algorithm.o
 	gcc $(CFLAGS) Textes/naif_xp_langnat.o text/text_algorithm.o -o naif_xp_langnat -lm
 
@@ -233,6 +237,7 @@ tunedbm_langnat: algos/tunedbm.o Textes/benchmarks_langnat.o
 
 tvsbs_langnat: algos/tvsbs.o Textes/benchmarks_langnat.o
 	gcc $(CFLAGS) algos/tvsbs.o Textes/benchmarks_langnat.o -o tvsbs_langnat -lm
+
 
 
 naif_xp_papi_langnat: Textes/naif_xp_papi_langnat.o text/text_algorithm.o
