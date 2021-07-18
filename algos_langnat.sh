@@ -1,24 +1,24 @@
-nohup ./naif_xp_langnat 1000 100 2 > resultats_langnat/naif_xp_langnat_1000_100_2.txt &
-nohup ./kmp_langnat 1000 100 2 > resultats_langnat/kmp_langnat_1000_100_2.txt &
-nohup ./kmp2_langnat 1000 100 2 > resultats_langnat/kmp2_langnat_1000_100_2.txt &
-nohup ./ag_langnat 1000 100 2 > resultats_langnat/ag_langnat_1000_100_2.txt &
-nohup ./aoso2_langnat 1000 100 2 > resultats_langnat/aoso2_langnat_1000_100_2.txt &
-nohup ./aoso6_langnat 1000 100 2 > resultats_langnat/aoso6_langnat_1000_100_2.txt &
-nohup ./bmh-sbndm_langnat 1000 100 2 > resultats_langnat/bmh-sbndm_langnat_1000_100_2.txt &
-nohup ./bndmq4_langnat 1000 100 2 > resultats_langnat/bndmq4_langnat_1000_100_2.txt &
-nohup ./ebom_langnat 1000 100 2 > resultats_langnat/ebom_langnat_1000_100_2.txt &
-nohup ./fjs_langnat 1000 100 2 > resultats_langnat/fjs_langnat_1000_100_2.txt &
-nohup ./fs_langnat 1000 100 2 > resultats_langnat/fs_langnat_1000_100_2.txt &
-nohup ./fsbndm_langnat 1000 100 2 > resultats_langnat/fsbndm_langnat_1000_100_2.txt &
-nohup ./graspm_langnat 1000 100 2 > resultats_langnat/graspm_langnat_1000_100_2.txt &
-nohup ./hash3_langnat 1000 100 2 > resultats_langnat/hash3_langnat_1000_100_2.txt &
-nohup ./hash5_langnat 1000 100 2 > resultats_langnat/hash5_langnat_1000_100_2.txt &
-nohup ./hash8_langnat 1000 100 2 > resultats_langnat/hash8_langnat_1000_100_2.txt &
-nohup ./kbndm_langnat 1000 100 2 > resultats_langnat/kbndm_langnat_1000_100_2.txt &
-nohup ./lbndm_langnat 1000 100 2 > resultats_langnat/lbndm_langnat_1000_100_2.txt &
-nohup ./sa_langnat 1000 100 2 > resultats_langnat/sa_langnat_1000_100_2.txt &
-nohup ./sbndm-bmh_langnat 1000 100 2 > resultats_langnat/sbndm-bmh_langnat_1000_100_2.txt &
-nohup ./sbndmq4_langnat 1000 100 2 > resultats_langnat/sbndmq4_langnat_1000_100_2.txt &
-nohup ./ssef_langnat 1000 100 2 > resultats_langnat/ssef_langnat_1000_100_2.txt &
-nohup ./tunedbm_langnat 1000 100 2 > resultats_langnat/tunedbm_langnat_1000_100_2.txt &
-nohup ./tvsbs_langnat 1000 100 2 > resultats_langnat/tvsbs_langnat_1000_100_2.txt &
+nohup ./naif_xp_langnat Textes/ch21.txt 200 > resultats_langnat/naif_xp_langnat_ch21_200.txt &
+nohup ./kmp_langnat Textes/ch21.txt 200 > resultats_langnat/kmp_langnat_ch21_200.txt &
+nohup ./kmp2_langnat Textes/ch21.txt 200 > resultats_langnat/kmp2_langnat_ch21_200.txt &
+nohup ./ag_langnat Textes/ch21.txt 200 > resultats_langnat/ag_langnat_ch21_200.txt &
+nohup ./aoso2_langnat Textes/ch21.txt 200 > resultats_langnat/aoso2_langnat_ch21_200.txt &
+nohup ./aoso6_langnat Textes/ch21.txt 200 > resultats_langnat/aoso6_langnat_ch21_200.txt &
+nohup ./bmh-sbndm_langnat Textes/ch21.txt 200 > resultats_langnat/bmh-sbndm_langnat_ch21_200.txt &
+nohup ./bndmq4_langnat Textes/ch21.txt 200 > resultats_langnat/bndmq4_langnat_ch21_200.txt &
+nohup ./ebom_langnat Textes/ch21.txt 200 > resultats_langnat/ebom_langnat_ch21_200.txt &
+nohup ./fjs_langnat Textes/ch21.txt 200 > resultats_langnat/fjs_langnat_ch21_200.txt &
+nohup ./fs_langnat Textes/ch21.txt 200 > resultats_langnat/fs_langnat_ch21_200.txt &
+nohup ./fsbndm_langnat Textes/ch21.txt 200 > resultats_langnat/fsbndm_langnat_ch21_200.txt &
+nohup ./graspm_langnat Textes/ch21.txt 200 > resultats_langnat/graspm_langnat_ch21_200.txt &
+nohup ./hash3_langnat Textes/ch21.txt 200 > resultats_langnat/hash3_langnat_ch21_200.txt &
+nohup ./hash5_langnat Textes/ch21.txt 200 > resultats_langnat/hash5_langnat_ch21_200.txt &
+nohup ./hash8_langnat Textes/ch21.txt 200 > resultats_langnat/hash8_langnat_ch21_200.txt &
+nohup ./kbndm_langnat Textes/ch21.txt 200 > resultats_langnat/kbndm_langnat_ch21_200.txt &
+nohup ./lbndm_langnat Textes/ch21.txt 200 > resultats_langnat/lbndm_langnat_ch21_200.txt &
+nohup ./sa_langnat Textes/ch21.txt 200 > resultats_langnat/sa_langnat_ch21_200.txt &
+nohup ./sbndm-bmh_langnat Textes/ch21.txt 200 > resultats_langnat/sbndm-bmh_langnat_ch21_200.txt &
+nohup ./sbndmq4_langnat Textes/ch21.txt 200 > resultats_langnat/sbndmq4_langnat_ch21_200.txt &
+nohup ./ssef_langnat Textes/ch21.txt 200 > resultats_langnat/ssef_langnat_ch21_200.txt &
+nohup ./tunedbm_langnat Textes/ch21.txt 200 > resultats_langnat/tunedbm_langnat_ch21_200.txt &
+nohup ./tvsbs_langnat Textes/ch21.txt 200 > resultats_langnat/tvsbs_langnat_ch21_200.txt &
