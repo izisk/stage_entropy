@@ -67,7 +67,7 @@ int main(int argc, char ** argv){
 
   for(n = 200; n <= text_size; n += 100){
 
-    for(m = 10; n <= pattern_size; n += 10){
+    for(m = 10; m <= pattern_size; m += 10){
 
       for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;

@@ -3,6 +3,15 @@ CFLAGS = -Wall -O3
 
 all:random_distribution	
 
+algos: naif_xp kmp kmp2 ag aoso2 aoso6 bmh-sbndm bndmq4 ebom fjs fs fsbndm graspm hash3 hash5 hash8 kbndm lbndm sa sbndm-bmh sbndmq4 ssef tunedbm tvsbs 
+ 
+algos_papi: naif_xp_papi kmp_papi kmp2_papi ag_papi aoso2_papi aoso6_papi bmh-sbndm_papi bndmq4_papi ebom_papi fjs_papi fs_papi fsbndm_papi graspm_papi hash3_papi hash5_papi hash8_papi kbndm_papi lbndm_papi sa_papi sbndm-bmh_papi sbndmq4_papi ssef_papi tunedbm_papi tvsbs_papi
+
+algos_langnat: naif_xp_langnat kmp_langnat kmp2_langnat ag_langnat aoso2_langnat aoso6_langnat bmh-sbndm_langnat bndmq4_langnat ebom_langnat fjs_langnat fs_langnat fsbndm_langnat graspm_langnat hash3_langnat hash5_langnat hash8_langnat kbndm_langnat lbndm_langnat sa_langnat sbndm-bmh_langnat sbndmq4_langnat ssef_langnat tunedbm_langnat tvsbs_langnat 
+ 
+algos_papi_langnat: naif_xp_papi_langnat kmp_papi_langnat kmp2_papi_langnat ag_papi_langnat aoso2_papi_langnat aoso6_papi_langnat bmh-sbndm_papi_langnat bndmq4_papi_langnat ebom_papi_langnat fjs_papi_langnat fs_papi_langnat fsbndm_papi_langnat graspm_papi_langnat hash3_papi_langnat hash5_papi_langnat hash8_papi_langnat kbndm_papi_langnat lbndm_papi_langnat sa_papi_langnat sbndm-bmh_papi_langnat sbndmq4_papi_langnat ssef_papi_langnat tunedbm_papi_langnat tvsbs_papi_langnat
+
+
 random_distribution: random_distribution.o entropy.o
 	gcc $(CFLAGS) random_distribution.o entropy.o -o random_distribution -lm
 
@@ -153,8 +162,151 @@ tvsbs_papi: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o
 	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi.o -o tvsbs_papi -lm -lpapi
 
 
-ag1: algos/ag.o Textes/benchmarks_ch21.o
-	gcc $(CFLAGS) algos/ag.o Textes/benchmarks_ch21.o -o ag1 -lm
+naif_xp_langnat: Textes/naif_xp_langnat.o text/text_algorithm.o
+	gcc $(CFLAGS) Textes/naif_xp_langnat.o text/text_algorithm.o -o naif_xp_langnat -lm
+
+kmp_langnat: Textes/kmp_langnat.o text/text_algorithm.o
+	gcc $(CFLAGS) Textes/kmp_langnat.o text/text_algorithm.o -o kmp_langnat -lm
+
+kmp2_langnat: algos/kmp.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/kmp.o Textes/benchmarks_langnat.o -o kmp2_langnat -lm
+
+ag_langnat: algos/ag.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/ag.o Textes/benchmarks_langnat.o -o ag_langnat -lm
+
+aoso2_langnat: algos/aoso2.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/aoso2.o Textes/benchmarks_langnat.o -o aoso2_langnat -lm
+
+aoso6_langnat: algos/aoso6.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/aoso6.o Textes/benchmarks_langnat.o -o aoso6_langnat -lm
+
+bmh-sbndm_langnat: algos/bmh-sbndm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/bmh-sbndm.o Textes/benchmarks_langnat.o -o bmh-sbndm_langnat -lm
+
+bndmq4_langnat: algos/bndmq4.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/bndmq4.o Textes/benchmarks_langnat.o -o bndmq4_langnat -lm
+
+ebom_langnat: algos/ebom.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/ebom.o Textes/benchmarks_langnat.o -o ebom_langnat -lm
+
+fjs_langnat: algos/fjs.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/fjs.o Textes/benchmarks_langnat.o -o fjs_langnat -lm
+
+fs_langnat: algos/fs.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/fs.o Textes/benchmarks_langnat.o -o fs_langnat -lm
+
+fsbndm_langnat: algos/fsbndm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/fsbndm.o Textes/benchmarks_langnat.o -o fsbndm_langnat -lm
+
+graspm_langnat: algos/graspm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/graspm.o Textes/benchmarks_langnat.o -o graspm_langnat -lm
+
+hash3_langnat: algos/hash3.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/hash3.o Textes/benchmarks_langnat.o -o hash3_langnat -lm
+
+hash5_langnat: algos/hash5.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/hash5.o Textes/benchmarks_langnat.o -o hash5_langnat -lm
+
+hash8_langnat: algos/hash8.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/hash8.o Textes/benchmarks_langnat.o -o hash8_langnat -lm
+
+kbndm_langnat: algos/kbndm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/kbndm.o Textes/benchmarks_langnat.o -o kbndm_langnat -lm
+
+lbndm_langnat: algos/lbndm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/lbndm.o Textes/benchmarks_langnat.o -o lbndm_langnat -lm
+
+sa_langnat: algos/sa.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/sa.o Textes/benchmarks_langnat.o -o sa_langnat -lm
+
+sbndm-bmh_langnat: algos/sbndm-bmh.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/sbndm-bmh.o Textes/benchmarks_langnat.o -o sbndm-bmh_langnat -lm
+
+sbndmq4_langnat:  algos/sbndmq4.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/sbndmq4.o Textes/benchmarks_langnat.o -o sbndmq4_langnat -lm
+
+ssef_langnat: algos/ssef.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/ssef.o Textes/benchmarks_langnat.o -o ssef_langnat -lm
+
+tunedbm_langnat: algos/tunedbm.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/tunedbm.o Textes/benchmarks_langnat.o -o tunedbm_langnat -lm
+
+tvsbs_langnat: algos/tvsbs.o Textes/benchmarks_langnat.o
+	gcc $(CFLAGS) algos/tvsbs.o Textes/benchmarks_langnat.o -o tvsbs_langnat -lm
+
+
+naif_xp_papi_langnat: Textes/naif_xp_papi_langnat.o text/text_algorithm.o
+	gcc $(CFLAGS) Textes/naif_xp_papi_langnat.o text/text_algorithm.o -o naif_xp_papi_langnat -lm
+
+kmp_papi_langnat: Textes/kmp_papi_langnat.o text/text_algorithm.o
+	gcc $(CFLAGS) Textes/kmp_papi_langnat.o text/text_algorithm.o -o kmp_papi_langnat -lm
+
+kmp2_papi_langnat: algos/kmp.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/kmp.o Textes/benchmarks_papi_langnat.o -o kmp2_papi_langnat -lm
+
+ag_papi_langnat: algos/ag.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/ag.o Textes/benchmarks_papi_langnat.o -o ag_papi_langnat -lm
+
+aoso2_papi_langnat: algos/aoso2.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/aoso2.o Textes/benchmarks_papi_langnat.o -o aoso2_papi_langnat -lm
+
+aoso6_papi_langnat: algos/aoso6.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/aoso6.o Textes/benchmarks_papi_langnat.o -o aoso6_papi_langnat -lm
+
+bmh-sbndm_papi_langnat: algos/bmh-sbndm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/bmh-sbndm.o Textes/benchmarks_papi_langnat.o -o bmh-sbndm_papi_langnat -lm
+
+bndmq4_papi_langnat: algos/bndmq4.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/bndmq4.o Textes/benchmarks_papi_langnat.o -o bndmq4_papi_langnat -lm
+
+ebom_papi_langnat: algos/ebom.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/ebom.o Textes/benchmarks_papi_langnat.o -o ebom_papi_langnat -lm
+
+fjs_papi_langnat: algos/fjs.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/fjs.o Textes/benchmarks_papi_langnat.o -o fjs_papi_langnat -lm
+
+fs_papi_langnat: algos/fs.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/fs.o Textes/benchmarks_papi_langnat.o -o fs_papi_langnat -lm
+
+fsbndm_papi_langnat: algos/fsbndm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/fsbndm.o Textes/benchmarks_papi_langnat.o -o fsbndm_papi_langnat -lm
+
+graspm_papi_langnat: algos/graspm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/graspm.o Textes/benchmarks_papi_langnat.o -o graspm_papi_langnat -lm
+
+hash3_papi_langnat: algos/hash3.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/hash3.o Textes/benchmarks_papi_langnat.o -o hash3_papi_langnat -lm
+
+hash5_papi_langnat: algos/hash5.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/hash5.o Textes/benchmarks_papi_langnat.o -o hash5_papi_langnat -lm
+
+hash8_papi_langnat: algos/hash8.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/hash8.o Textes/benchmarks_papi_langnat.o -o hash8_papi_langnat -lm
+
+kbndm_papi_langnat: algos/kbndm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/kbndm.o Textes/benchmarks_papi_langnat.o -o kbndm_papi_langnat -lm
+
+lbndm_papi_langnat: algos/lbndm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/lbndm.o Textes/benchmarks_papi_langnat.o -o lbndm_papi_langnat -lm
+
+sa_papi_langnat: algos/sa.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/sa.o Textes/benchmarks_papi_langnat.o -o sa_papi_langnat -lm
+
+sbndm-bmh_papi_langnat: algos/sbndm-bmh.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/sbndm-bmh.o Textes/benchmarks_papi_langnat.o -o sbndm-bmh_papi_langnat -lm
+
+sbndmq4_papi_langnat:  algos/sbndmq4.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/sbndmq4.o Textes/benchmarks_papi_langnat.o -o sbndmq4_papi_langnat -lm
+
+ssef_papi_langnat: algos/ssef.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/ssef.o Textes/benchmarks_papi_langnat.o -o ssef_papi_langnat -lm
+
+tunedbm_papi_langnat: algos/tunedbm.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/tunedbm.o Textes/benchmarks_papi_langnat.o -o tunedbm_papi_langnat -lm
+
+tvsbs_papi_langnat: algos/tvsbs.o Textes/benchmarks_papi_langnat.o
+	gcc $(CFLAGS) algos/tvsbs.o Textes/benchmarks_papi_langnat.o -o tvsbs_papi_langnat -lm
+
 
 
 clean:
