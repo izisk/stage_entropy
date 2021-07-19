@@ -5,6 +5,7 @@
 #include<papi.h>
 #include <string.h> 
 #include <sys/stat.h>
+#include "benchmarks_langnat.h"
 
 
 #define PAPI_events_number 2

@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <math.h>
 #include<time.h>
+#include "benchmarks_langnat.h"
 
 
 int main(int argc, char ** argv){
