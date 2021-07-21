@@ -59,7 +59,7 @@ int main(int argc, char ** argv){
     stat(fichier, &st);  
     text_size = st.st_size;
 
-    char text[text_size];
+    char text[text_size+pattern_size+1];
 
     fgets(text, text_size, fp);
     fclose(fp);
