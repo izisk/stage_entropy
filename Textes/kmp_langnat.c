@@ -69,6 +69,7 @@ int main(int argc, char ** argv){
         for(int m = 10; m <= pattern_size; m += 10){
 
             nb_comparaisons = 0;
+            tempsmoyen = 0;
 
             for(i = 0; i < nb_experiment; i++){
                 
