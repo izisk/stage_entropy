@@ -71,8 +71,8 @@ int main(int argc, char ** argv){
 
       for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
-	nb_instructions = 0;
-	nb_branch_fault = 0;
+	      nb_instructions = 0;
+	      nb_branch_fault = 0;
 
 	for(i = 0; i < nb_experiment; i++){
   

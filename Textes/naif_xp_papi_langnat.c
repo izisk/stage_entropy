@@ -83,11 +83,9 @@ int main(int argc, char ** argv){
     fclose(fp);
 
     int i;
-    long double entropy = 0;
-    clock_t temps_deb, temps_fin;
-    long double temps;
+    long double target = 0;
     int x, y;
-    long double alphabet[255] = {0};
+    long double alphabet[256] = {0};
     long long values[PAPI_events_number];
     int retval;
     int eventSet = set_PAPI();
@@ -97,11 +95,15 @@ int main(int argc, char ** argv){
         alphabet[(int)text[i]]++;
     }
 
-    for(i = 0; i < 255; i++){
+    for(i = 0; i < 32; i++){
+        alphabet[i] = 0;
+    }
+
+    for(i = 0; i < 256; i++){
         if (alphabet[i] != 0) {
             alphabet_size++;
             alphabet[i] = (long double) alphabet[i]/(text_size - 1);
-            entropy = entropy - alphabet[i]*log(alphabet[i]);
+            target = target - alphabet[i]*log(alphabet[i]);
         }
     }
     
@@ -112,22 +114,28 @@ int main(int argc, char ** argv){
 
       for(int m = 10; m <= pattern_size; m += 10){ 
 
-	  nb_comparaisons = 0;
-	  nb_instructions = 0;
-	  nb_branch_fault = 0;
-	  
-	  if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
-	      ERROR_RETURN(retval);
-	    algorithme_naif(&text[x], &text[y], n, m);
-	    if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
-	      ERROR_RETURN(retval);
+        nb_comparaisons = 0;
+        nb_instructions = 0;
+        nb_branch_fault = 0;
 
-	    nb_instructions += values[0];
-	    nb_branch_fault += values[1];
-	  
+        for(i = 0; i < nb_experiment; i++){
 
-	  printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons, nb_instructions, nb_branch_fault);
-	
+          x=rand()%(text_size - n);
+          y=rand()%(text_size - m);
+	  
+          if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
+            ERROR_RETURN(retval);
+          algorithme_naif(&text[x], &text[y], n, m);
+          if ( (retval = PAPI_stop(eventSet, values)) != PAPI_OK)
+            ERROR_RETURN(retval);
+
+          nb_instructions += values[0];
+          nb_branch_fault += values[1];
+
+        }
+
+	    printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
+
       }
     }
     return EXIT_SUCCESS;

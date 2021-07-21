@@ -31,21 +31,28 @@ int main(int argc, char ** argv){
     fclose(fp);
 
     int i;
-    long double entropy = 0;
+    long double target = 0;
+    int nb_experiment = 10000;
     clock_t temps_deb, temps_fin;
     long double temps;
+    long double tempsmoyen;
     int x, y;
-    long double alphabet[255] = {0};  
+    long double alphabet[256] = {0};  
 
     for(i = 0; i < text_size; i++){
         alphabet[(int)text[i]]++;
     }
 
-    for(i = 0; i < 255; i++){
+    for(i = 0; i < 32; i++){
+        alphabet[i] = 0;
+    }
+    
+
+    for(i = 0; i < 256; i++){
         if (alphabet[i] != 0) {
             alphabet_size++;
             alphabet[i] = (long double) alphabet[i]/(text_size - 1);
-            entropy = entropy - alphabet[i]*log(alphabet[i]);
+            target = target - alphabet[i]*log(alphabet[i]);
         }
     }
     
@@ -56,6 +63,8 @@ int main(int argc, char ** argv){
         for(int m = 10; m <= pattern_size; m += 10){
 
             nb_comparaisons = 0;
+
+            for(i = 0; i < nb_experiment; i++){
                 
                 x=rand()%(text_size - n);
                 y=rand()%(text_size - m);
@@ -69,8 +78,12 @@ int main(int argc, char ** argv){
                 //temps fin
                 temps_fin = clock();
                 temps=(long double)(temps_fin - temps_deb)/(long double)CLOCKS_PER_SEC;
+                tempsmoyen+=temps;
+            }
+            tempsmoyen = tempsmoyen/nb_experiment;
 
-            printf("%d %d %Lg %lld %Lg\n", n, m, entropy, nb_comparaisons, temps);
+            printf("%d %d %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
+
         }
     }
 
