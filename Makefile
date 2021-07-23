@@ -315,7 +315,7 @@ tvsbs_papi_langnat: algos/tvsbs.o Textes/benchmarks_papi_langnat.o
 
 
 clean:
-	rm *.o text/*.o algos/*.o
+	rm *.o text/*.o algos/*.o Textes/*.o
 	rm -f random_distribution
 	rm -f naif_xp
 	rm -f kmp

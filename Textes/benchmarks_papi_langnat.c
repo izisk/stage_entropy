@@ -59,16 +59,19 @@ int main(int argc, char ** argv){
     stat(fichier, &st);  
     text_size = st.st_size;
 
-    char text[text_size+pattern_size+1];
+    char * text = malloc(sizeof(char)*(text_size+pattern_size+1));
 
-    fgets(text, text_size, fp);
+    fread(text, sizeof(char), text_size, fp);
     fclose(fp);
 
     int i;
     long double target = 0;
     int nb_experiment = 10000;
     int x, y;
-    long double alphabet[256] = {0};
+    long double alphabet[256];
+
+    memset(alphabet, 0, 256*sizeof(long double));
+
     int n, m;
     long long values[PAPI_events_number];
     int retval;
@@ -86,14 +89,14 @@ int main(int argc, char ** argv){
     for(i = 0; i < 256; i++){
         if (alphabet[i] != 0) {
             alphabet_size++;
-            alphabet[i] = (long double) alphabet[i]/(text_size - 1);
+            alphabet[i] = (long double) alphabet[i]/(text_size);
             target = target - alphabet[i]*log(alphabet[i]);
         }
     }
 
     printf("n=%d m=%d k=%d\n", text_size, pattern_size, alphabet_size);
 
-    for(n = 200; n <= text_size; n += 100){
+    for(n = 200; n <= text_size; n *= 2){
 
     for(m = 10; m <= pattern_size; m += 10){
 

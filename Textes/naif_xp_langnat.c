@@ -51,9 +51,9 @@ int main(int argc, char ** argv){
     stat(fichier, &st);  
     text_size = st.st_size;
 
-    char text[text_size];
+    char * text = malloc(sizeof(char)*(text_size+1));
 
-    fgets(text, text_size, fp);
+    fread(text, sizeof(char), text_size, fp);
     fclose(fp);
 
     int i;
@@ -63,7 +63,9 @@ int main(int argc, char ** argv){
     long double temps;
     long double tempsmoyen;
     int x, y;
-    long double alphabet[256] = {0};  
+    long double alphabet[256];
+
+    memset(alphabet, 0, 256*sizeof(long double));
 
     for(i = 0; i < text_size; i++){
         alphabet[(int)text[i]]++;
@@ -76,14 +78,14 @@ int main(int argc, char ** argv){
     for(i = 0; i < 256; i++){
         if (alphabet[i] != 0) {
             alphabet_size++;
-            alphabet[i] = (long double) alphabet[i]/(text_size - 1);
+            alphabet[i] = (long double) alphabet[i]/(text_size);
             target = target - alphabet[i]*log(alphabet[i]);
         }
     }
     
     printf("n=%d m=%d k=%d\n", text_size, pattern_size, alphabet_size);
 
-    for(int n = 200; n <= text_size; n += 100){
+    for(int n = 200; n <= text_size; n *= 2){
 
         for(int m = 10; m <= pattern_size; m += 10){
 
@@ -112,6 +114,7 @@ int main(int argc, char ** argv){
         }
     }
 
+    free(text);
     return EXIT_SUCCESS;
 
 }
