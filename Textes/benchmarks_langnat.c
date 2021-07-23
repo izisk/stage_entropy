@@ -58,7 +58,7 @@ int main(int argc, char ** argv){
         }
     }
     
-    printf("n=%d m=%d k=%d\n", text_size, pattern_size, alphabet_size);
+    printf("n=%d %d m=%d k=%d\n", text_size, strlen(text), pattern_size, alphabet_size);
 
     for(int n = 200; n <= text_size; n *= 2){
 
