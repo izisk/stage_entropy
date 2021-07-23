@@ -315,7 +315,7 @@ tvsbs_papi_dist: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_p
 
 
 clean:
-	rm *.o text/*.o algos/*.o
+	rm *.o text/*.o algos/*.o Textes/*.o
 	rm -f random_distribution
 	rm -f naif_xp
 	rm -f kmp
