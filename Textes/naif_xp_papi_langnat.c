@@ -84,6 +84,7 @@ int main(int argc, char ** argv){
 
     int i;
     long double target = 0;
+    int nb_experiment = 10000;
     int x, y;
     long double alphabet[256];
 
