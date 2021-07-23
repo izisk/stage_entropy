@@ -89,7 +89,7 @@ int main(int argc, char ** argv){
 
         }
     }
-
+    free(text);
     return EXIT_SUCCESS;
 
 }

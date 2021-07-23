@@ -94,7 +94,7 @@ int main(int argc, char ** argv){
             printf("%d %d %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
         }
     }
-
+    free(text);
     return EXIT_SUCCESS;
 
 }
