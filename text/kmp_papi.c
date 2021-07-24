@@ -67,14 +67,14 @@ int main(int argc, char ** argv){
 
     for(int m = 10; m <= pattern_size; m += 10){
 
-    for(target = 0.001; target <= (log2(alphabet_size)-0.2); target +=0.01){
+    for(target = 0.001; target <= (log2(alphabet_size)); target +=0.01){
       	nb_comparaisons = 0;
+        nb_instructions = 0;
+	      nb_branch_fault = 0;
 
 	for(i = 0; i < nb_experiment; i++){
 
-
-	  if(i % 100 == 0)
-	    random_distribution_generator(distribution, target, alphabet_size, 1000);
+	  random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, n);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
       if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
@@ -84,11 +84,11 @@ int main(int argc, char ** argv){
           ERROR_RETURN(retval);
 
     nb_instructions += values[0];
-	    nb_branch_fault += values[1];
-	  }
+	  nb_branch_fault += values[1];
 
-	  printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
 	}
+	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
+    }
     }
     }
     return EXIT_SUCCESS;

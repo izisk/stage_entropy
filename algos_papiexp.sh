@@ -1,0 +1,25 @@
+nohup ./naif_xp_papi 1000 100 2 > resultats/naif_xp_papi_1000_100_2.txt &
+nohup ./kmp_papi 1000 100 2 > resultats/kmp_papi_1000_100_2.txt &
+nohup ./kmp2_papi 1000 100 2 > resultats/kmp2_papi_1000_100_2.txt &
+nohup ./ag_papi 1000 100 2 > resultats/ag_papi_1000_100_2.txt &
+nohup ./aoso2_papi 1000 100 2 > resultats/aoso2_papi_1000_100_2.txt &
+nohup ./aoso6_papi 1000 100 2 > resultats/aoso6_papi_1000_100_2.txt &
+nohup ./bmh-sbndm_papi 1000 100 2 > resultats/bmh-sbndm_papi_1000_100_2.txt &
+nohup ./bndmq4_papi 1000 100 2 > resultats/bndmq4_papi_1000_100_2.txt &
+nohup ./ebom_papi 1000 100 2 > resultats/ebom_papi_1000_100_2.txt &
+nohup ./fjs_papi 1000 100 2 > resultats/fjs_papi_1000_100_2.txt &
+nohup ./fs_papi 1000 100 2 > resultats/fs_papi_1000_100_2.txt &
+nohup ./fsbndm_papi 1000 100 2 > resultats/fsbndm_papi_1000_100_2.txt &
+nohup ./graspm_papi 1000 100 2 > resultats/graspm_papi_1000_100_2.txt &
+nohup ./hash3_papi 1000 100 2 > resultats/hash3_papi_1000_100_2.txt &
+nohup ./hash5_papi 1000 100 2 > resultats/hash5_papi_1000_100_2.txt &
+nohup ./hash8_papi 1000 100 2 > resultats/hash8_papi_1000_100_2.txt &
+nohup ./kbndm_papi 1000 100 2 > resultats/kbndm_papi_1000_100_2.txt &
+nohup ./lbndm_papi 1000 100 2 > resultats/lbndm_papi_1000_100_2.txt &
+nohup ./sa_papi 1000 100 2 > resultats/sa_papi_1000_100_2.txt &
+nohup ./sbndm-bmh_papi 1000 100 2 > resultats/sbndm-bmh_papi_1000_100_2.txt &
+nohup ./sbndmq4_papi 1000 100 2 > resultats/sbndmq4_papi_1000_100_2.txt &
+nohup ./ssef_papi 1000 100 2 > resultats/ssef_papi_1000_100_2.txt &
+nohup ./tunedbm_papi 1000 100 2 > resultats/tunedbm_papi_1000_100_2.txt &
+nohup ./tvsbs_papi 1000 100 2 > resultats/tvsbs_papi_1000_100_2.txt &
+

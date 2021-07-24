@@ -69,7 +69,8 @@ int main(int argc, char ** argv){
     int pattern_size = atoi(argv[2]);
     int alphabet_size = atoi(argv[3]);
     long double target;
-    long double distribution[alphabet_size];
+    long double dist_text[alphabet_size];
+    long double dist_pattern[alphabet_size];
     unsigned char text[text_size];
     unsigned char pattern[pattern_size];
     char alphabet[alphabet_size];    
@@ -93,9 +94,11 @@ int main(int argc, char ** argv){
 	  
 	  for(i = 0; i < nb_experiment; i++){
   
-	    random_distribution_generator(distribution, target, alphabet_size, 1000);
-	    text_generator(text, distribution, alphabet, alphabet_size, n);
-	    text_generator(pattern, distribution, alphabet, alphabet_size, m);
+	    random_distribution_generator(dist_text, target, alphabet_size, 1000);
+        random_distribution_generator(dist_pattern, target, alphabet_size, 1000);
+        text_generator(text, dist_text, alphabet, alphabet_size, n);
+        text_generator(pattern, dist_pattern, alphabet, alphabet_size, m);
+        
 	    if ( (retval = PAPI_start(eventSet)) != PAPI_OK)
 	      ERROR_RETURN(retval);
 	    algorithme_naif(text, pattern, n, m);
