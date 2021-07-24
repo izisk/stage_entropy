@@ -61,7 +61,6 @@ int main(int argc, char ** argv){
     long long int nb_instructions, nb_branch_fault;
 
 
-
     create_alphabet(alphabet, alphabet_size);
 
     for(int n = 200; n <= text_size; n += 100){
@@ -86,7 +85,6 @@ int main(int argc, char ** argv){
 
     nb_instructions += values[0];
 	  nb_branch_fault += values[1];
-
 
 	}
 	printf("%d %d %Lg %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), nb_instructions/(long double)(nb_experiment), nb_branch_fault/(long double)(nb_experiment));
