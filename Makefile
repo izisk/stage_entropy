@@ -322,150 +322,150 @@ tvsbs_papi_langnat: algos/tvsbs.o Textes/benchmarks_papi_langnat.o
 
 
 naif_xp_dist: text/naif_xp_dist.o entropy.o text/text_generator.o text/text_algorithm.o
-	gcc $(CFLAGS) text/naif_xp_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp -lm
+	gcc $(CFLAGS) text/naif_xp_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp_dist -lm
 
 kmp_dist: text/kmp_dist.o entropy.o text/text_generator.o text/text_algorithm.o
-	gcc $(CFLAGS) text/kmp_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o kmp -lm
+	gcc $(CFLAGS) text/kmp_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o kmp_dist -lm
 
 kmp2_dist: algos/kmp.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/kmp.o entropy.o text/text_generator.o text/benchmarks_dist.o -o kmp2 -lm
+	gcc $(CFLAGS) algos/kmp.o entropy.o text/text_generator.o text/benchmarks_dist.o -o kmp2_dist -lm
 
 ag_dist: algos/ag.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ag -lm
+	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ag_dist -lm
 
 aoso2_dist: algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_dist.o -o aoso2 -lm
+	gcc $(CFLAGS) algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_dist.o -o aoso2_dist -lm
 
 aoso6_dist: algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_dist.o -o aoso6 -lm
+	gcc $(CFLAGS) algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_dist.o -o aoso6_dist -lm
 
 bmh-sbndm_dist: algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o bmh-sbndm -lm
+	gcc $(CFLAGS) algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o bmh-sbndm_dist -lm
 
 bndmq4_dist: algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o -o bndmq4 -lm
+	gcc $(CFLAGS) algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o -o bndmq4_dist -lm
 
 ebom_dist: algos/ebom.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/ebom.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ebom -lm
+	gcc $(CFLAGS) algos/ebom.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ebom_dist -lm
 
 fjs_dist: algos/fjs.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/fjs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fjs -lm
+	gcc $(CFLAGS) algos/fjs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fjs_dist -lm
 
 fs_dist: algos/fs.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/fs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fs -lm
+	gcc $(CFLAGS) algos/fs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fs_dist -lm
 
 fsbndm_dist: algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fsbndm -lm
+	gcc $(CFLAGS) algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o fsbndm_dist -lm
 
 graspm_dist: algos/graspm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/graspm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o graspm -lm
+	gcc $(CFLAGS) algos/graspm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o graspm_dist -lm
 
 hash3_dist: algos/hash3.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/hash3.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash3 -lm
+	gcc $(CFLAGS) algos/hash3.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash3_dist -lm
 
 hash5_dist: algos/hash5.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/hash5.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash5 -lm
+	gcc $(CFLAGS) algos/hash5.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash5_dist -lm
 
 hash8_dist: algos/hash8.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/hash8.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash8 -lm
+	gcc $(CFLAGS) algos/hash8.o entropy.o text/text_generator.o text/benchmarks_dist.o -o hash8_dist -lm
 
 kbndm_dist: algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o kbndm -lm
+	gcc $(CFLAGS) algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o kbndm_dist -lm
 
 lbndm_dist: algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o lbndm -lm
+	gcc $(CFLAGS) algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o lbndm_dist -lm
 
 sa_dist: algos/sa.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/sa.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sa -lm
+	gcc $(CFLAGS) algos/sa.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sa_dist -lm
 
 sbndm-bmh_dist: algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sbndm-bmh -lm
+	gcc $(CFLAGS) algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sbndm-bmh_dist -lm
 
 sbndmq4_dist:  algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sbndmq4 -lm
+	gcc $(CFLAGS) algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_dist.o -o sbndmq4_dist -lm
 
 ssef_dist: algos/ssef.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/ssef.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ssef -lm
+	gcc $(CFLAGS) algos/ssef.o entropy.o text/text_generator.o text/benchmarks_dist.o -o ssef_dist -lm
 
 tunedbm_dist: algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o tunedbm -lm
+	gcc $(CFLAGS) algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_dist.o -o tunedbm_dist -lm
 
 tvsbs_dist: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_dist.o
-	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o tvsbs -lm
+	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_dist.o -o tvsbs_dist -lm
 
 
 
 naif_xp_papi_dist: text/naif_xp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o
-	gcc $(CFLAGS) text/naif_xp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp_papi -lm -lpapi
+	gcc $(CFLAGS) text/naif_xp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o naif_xp_papi_dist -lm -lpapi
 
 kmp_papi_dist: text/kmp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o
-	gcc $(CFLAGS) text/kmp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o kmp_papi -lm -lpapi
+	gcc $(CFLAGS) text/kmp_papi_dist.o entropy.o text/text_generator.o text/text_algorithm.o -o kmp_papi_dist -lm -lpapi
 
 kmp2_papi_dist: algos/kmp.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/kmp.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o kmp2_papi -lm -lpapi
+	gcc $(CFLAGS) algos/kmp.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o kmp2_papi_dist -lm -lpapi
 
 ag_papi_dist: algos/ag.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ag_papi -lm -lpapi
+	gcc $(CFLAGS) algos/ag.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ag_papi_dist -lm -lpapi
 
 aoso2_papi_dist: algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o aoso2_papi -lm -lpapi
+	gcc $(CFLAGS) algos/aoso2.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o aoso2_papi_dist -lm -lpapi
 
 aoso6_papi_dist: algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o aoso6_papi -lm -lpapi
+	gcc $(CFLAGS) algos/aoso6.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o aoso6_papi_dist -lm -lpapi
 
 bmh-sbndm_papi_dist: algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o bmh-sbndm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/bmh-sbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o bmh-sbndm_papi_dist -lm -lpapi
 
 bndmq4_papi_dist: algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o bndmq4_papi -lm -lpapi
+	gcc $(CFLAGS) algos/bndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o bndmq4_papi_dist -lm -lpapi
 
 ebom_papi_dist: algos/ebom.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/ebom.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ebom_papi -lm -lpapi
+	gcc $(CFLAGS) algos/ebom.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ebom_papi_dist -lm -lpapi
 
 fjs_papi_dist: algos/fjs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/fjs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fjs_papi -lm -lpapi
+	gcc $(CFLAGS) algos/fjs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fjs_papi_dist -lm -lpapi
 
 fs_papi_dist: algos/fs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/fs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fs_papi -lm -lpapi
+	gcc $(CFLAGS) algos/fs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fs_papi_dist -lm -lpapi
 
 fsbndm_papi_dist: algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fsbndm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/fsbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o fsbndm_papi_dist -lm -lpapi
 
 graspm_papi_dist: algos/graspm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/graspm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o graspm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/graspm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o graspm_papi_dist -lm -lpapi
 
 hash3_papi_dist: algos/hash3.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/hash3.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash3_papi -lm -lpapi
+	gcc $(CFLAGS) algos/hash3.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash3_papi_dist -lm -lpapi
 
 hash5_papi_dist: algos/hash5.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/hash5.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash5_papi -lm -lpapi
+	gcc $(CFLAGS) algos/hash5.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash5_papi_dist -lm -lpapi
 
 hash8_papi_dist: algos/hash8.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/hash8.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash8_papi -lm -lpapi
+	gcc $(CFLAGS) algos/hash8.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o hash8_papi_dist -lm -lpapi
 
 kbndm_papi_dist: algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o kbndm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/kbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o kbndm_papi_dist -lm -lpapi
 
 lbndm_papi_dist: algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o lbndm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/lbndm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o lbndm_papi_dist -lm -lpapi
 
 sa_papi_dist: algos/sa.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/sa.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sa_papi -lm -lpapi
+	gcc $(CFLAGS) algos/sa.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sa_papi_dist -lm -lpapi
 
 sbndm-bmh_papi_dist: algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sbndm-bmh_papi -lm -lpapi
+	gcc $(CFLAGS) algos/sbndm-bmh.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sbndm-bmh_papi_dist -lm -lpapi
 
 sbndmq4_papi_dist:  algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sbndmq4_papi -lm -lpapi
+	gcc $(CFLAGS) algos/sbndmq4.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o sbndmq4_papi_dist -lm -lpapi
 
 ssef_papi_dist: algos/ssef.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/ssef.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ssef_papi -lm -lpapi
+	gcc $(CFLAGS) algos/ssef.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o ssef_papi_dist -lm -lpapi
 
 tunedbm_papi_dist: algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o tunedbm_papi -lm -lpapi
+	gcc $(CFLAGS) algos/tunedbm.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o tunedbm_papi_dist -lm -lpapi
 
 tvsbs_papi_dist: algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o
-	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o tvsbs_papi -lm -lpapi
+	gcc $(CFLAGS) algos/tvsbs.o entropy.o text/text_generator.o text/benchmarks_papi_dist.o -o tvsbs_papi_dist -lm -lpapi
 
 
 

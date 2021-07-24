@@ -44,14 +44,13 @@ Considered files : Textes/benckmarks_langnat.c, Textes/naif_xp_langnat.c, Textes
 In this case we evaluate the algorithms on some example of natural language presented a few txt files.
 The files are bible.txt (The _Bible_ in French), ch21.txt (The DNA sequence of the 21st human chromosome), coran.txt (The _Coran_ in French), ecoli.txt (The DNA sequence of the bacteria Escherichia coli), shakespeare.txt (_Hamlet_ by Shakespeare in English) and tdm.txt (_Le_ _tour_ _du_ _monde_ _en_ _quatre_-_vingts_ _jours_ by Jules Verne in French).
 
-For each text file, we calculate the alphabet size and its Shannon entropy. The text_size goes from 200 to the text_size given in argument by step of 100. For each text_size we have the pattern_size going from 10 to the pattern_size given in argument by step of 10. For each pattern_size we make 10000 experiments. The end results of the measures are means of the 10000 experiments.
+For each text file, we calculate the alphabet size and its Shannon entropy. The text_size goes from 200 to the end of the text file doubling at each step. For each text_size we have the pattern_size going from 10 to the pattern_size given in argument by step of 10. For each pattern_size we make 10000 experiments. The end results of the measures are means of the 10000 experiments.
 
 To evaluate an algorithm :
 1. compile by taping this in terminal :
     make name_algorithm**_langnat** 
 2. execute by taping this in terminal :
-    ./name_algorithm**_langnat** Textes/txt_file text_size pattern_size
-Note : If you put 0 for text_size, the benchmarks is going till the end of the txt_file.
+    ./name_algorithm**_langnat** Textes/txt_file pattern_size
 
 As resultat you get :
     text_size pattern_size target nb_comparison time
