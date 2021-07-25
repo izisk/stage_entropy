@@ -74,8 +74,19 @@ You can use as well the prepared scripts where n=1000, m=100, k=2 :
     algos_papiexp.sh
     algos_dist.sh
     algos_papi_dist.sh
-    algos_langnat.sh
-    algos_papi_langnat.sh
+Or those for the benchmarks on natural language with m=100 :
+    algos_langnat_bible.sh
+    algos_papi_langnat_bible.sh
+    algos_langnat_ch21.sh
+    algos_papi_langnat_ch21.sh
+    algos_langnat_coran.sh
+    algos_papi_langnat_coran.sh
+    algos_langnat_ecoli.sh
+    algos_papi_langnat_ecoli.sh
+    algos_langnat_shakespeare.sh
+    algos_papi_langnat_shakespeare.sh
+    algos_langnat_tdm.sh
+    algos_papi_langnat_tdm.sh
 The resultats are redirected to resultats, resultats_dist and resultats_langnat respectively.
 
 Or you can directly consult the results in the following folders :
