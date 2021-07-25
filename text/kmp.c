@@ -39,7 +39,7 @@ int main(int argc, char ** argv){
 
     for(int m = 10; m <= pattern_size; m += 10){
 
-    for(target = 0.001; target <= (log2(alphabet_size)); target +=0.01){
+    for(target = 0.101; target <= (log2(alphabet_size)); target +=0.01){
       	nb_comparaisons = 0;
         tempsmoyen = 0;
 

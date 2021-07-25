@@ -14,8 +14,6 @@ long double collision_probability(long double * t, int n){
     return ent;
 }
 
-
-
 long double expected_cmp_number(long double * distribution, int alphabet_size,
 				int pattern_size){
   int cmp;
@@ -60,7 +58,7 @@ int main(int argc, char ** argv){
 
     for(int m = 10; m <= pattern_size; m += 10){ 
 
-    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
+    for(target = 0.101; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
         tempsmoyen = 0;
 
