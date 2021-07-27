@@ -51,20 +51,23 @@ int main(int argc, char ** argv){
     clock_t temps_deb, temps_fin;
     long double temps;
     long double tempsmoyen;
+    int n,m;
     
     create_alphabet(alphabet, alphabet_size);
 
-    for(int n = 200; n <= text_size; n += 100){
+    //for(int n = 200; n <= text_size; n += 100){
+      n = text_size;
 
-    for(int m = 10; m <= pattern_size; m += 10){ 
+    //for(int m = 10; m <= pattern_size; m += 10){ 
+      m = pattern_size;
 
-    for(target = 0.101; target <= log2(alphabet_size); target +=0.01){
+    for(target = 0.001; target <= log2(alphabet_size); target +=0.01){
       	nb_comparaisons = 0;
         tempsmoyen = 0;
 
 	for(i = 0; i < nb_experiment; i++){
 
-  
+
 	  random_distribution_generator(distribution, target, alphabet_size, 1000);
 	  text_generator(text, distribution, alphabet, alphabet_size, n);
 	  text_generator(pattern, distribution, alphabet, alphabet_size, m);
@@ -79,12 +82,12 @@ int main(int argc, char ** argv){
     temps=(long double)(temps_fin - temps_deb)/(long double)CLOCKS_PER_SEC;
     tempsmoyen+=temps;
 	}
-  tempsmoyen = tempsmoyen/nb_experiment;
+  tempsmoyen = tempsmoyen/(long double) nb_experiment;
 
 	printf("%d %d %Lg %Lg %Lg\n", n, m, target, nb_comparaisons/(long double)(nb_experiment), tempsmoyen);
 	
     }
-    }
-    }
+    //}
+    //}
     return EXIT_SUCCESS;
 }
