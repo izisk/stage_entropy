@@ -48,14 +48,14 @@ For each text file, we calculate the alphabet size and its Shannon entropy. The 
 
 To evaluate an algorithm :
 1. compile by taping this in terminal :
-    make name_algorithm**_langnat** 
+    make name_algorithm_langnat
 2. execute by taping this in terminal :
-    ./name_algorithm**_langnat** Textes/txt_file pattern_size
+    ./name_algorithm_langnat Textes/txt_file pattern_size
 
 As resultat you get :
     text_size pattern_size target nb_comparison time
 
-To get the number of total instructions executed and number of conditional branch instructions, do the same steps by replacing name_algorithm with name_algorithm**_papi_langnat**.
+To get the number of total instructions executed and number of conditional branch instructions, do the same steps by replacing name_algorithm with name_algorithm_papi_langnat.
 As result you get :
     text_size pattern_size target nb_total_instructions_executed nb_conditional_branch_instructions
 
@@ -87,9 +87,10 @@ Or those for the benchmarks on natural language with m=100 :
     algos_papi_langnat_shakespeare.sh
     algos_langnat_tdm.sh
     algos_papi_langnat_tdm.sh
+
 The resultats are redirected to resultats, resultats_dist and resultats_langnat respectively.
 
 Or you can directly consult the results in the following folders :
-resultats, resultats_dist and resultats_langnat
+resultats, resultats_dist and resultats_langnat.
 
 
