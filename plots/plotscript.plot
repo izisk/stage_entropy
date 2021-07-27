@@ -1,5 +1,5 @@
 set terminal eps
-set output "~/stALGORITHMe_entropy/plots/ALGORITHM__N___M__2.eps"
+set output "~/stage_entropy/plots/ALGORITHM__N___M__2.eps"
 set grid
 set xlabel "Entropy"
 set ylabel "Number of comparisons divided by n*m"
