@@ -9,10 +9,11 @@ long int __ENTROPY_FIRST_STEP_FAILURES__;
 long int __ENTROPY_INC_DIST_FAILURES__;
 long int __ENTROPY_MARKOV_STEP_FAILURES__;
 int __ENTROPY_NB_XP__;
-int __MULTIPLICATIONS_BY_FACTOR__;
+int __FIRST_STATE_ITERATIONS__;
 
 
 #define MIN(x,y) ((x)<(y))?x:y
+#define MAX(x,y) ((x)>(y))?x:y
 
 
 
@@ -27,7 +28,7 @@ void entropy_init_benchmarks(int nb_xp){
     __ENTROPY_INC_DIST_FAILURES__ = 0;
     __ENTROPY_NB_XP__ = nb_xp;
     __ENTROPY_MARKOV_STEP_FAILURES__ = 0;
-    __MULTIPLICATIONS_BY_FACTOR__ = 0;
+    __FIRST_STATE_ITERATIONS__ = 0;
 }
 
 /**
@@ -39,7 +40,7 @@ void entropy_print_benchmarks(){
 	 __ENTROPY_INC_DIST_FAILURES__/(double)(__ENTROPY_FIRST_STEP_FAILURES__+1));
   printf("Nombre moyen de rejets sur un pas Markovien: %lf\n", __ENTROPY_MARKOV_STEP_FAILURES__/(double)__ENTROPY_NB_XP__);
   printf("Nombre moyen de d'essai:%lf\n", __ENTROPY_FIRST_STEP_FAILURES__/(double)__ENTROPY_NB_XP__);
-  printf("Nombre moyen de multiplication par un facteur %lf \n", __MULTIPLICATIONS_BY_FACTOR__/(double)__ENTROPY_NB_XP__);
+  printf("Nombre moyen de multiplication par un facteur %lf \n", __FIRST_STATE_ITERATIONS__/(double)__ENTROPY_NB_XP__);
   
 }
 
@@ -84,8 +85,9 @@ long double aim_shannon_entropy(long double probability_left, long double target
     __ENTROPY_AIM_STEPS__++;
   }
   // the precision for entropy is lower than for probabilities.
-  if((double)entropy_p!=(double)target)
+  if((float)entropy_p!=(float)target)
     return -1;
+
   if(rand()%2)
     return p;
   return probability_left-p;
@@ -104,26 +106,31 @@ long double shannon_entropy(long double * t, int n){
 }
 
 
-void random_doubles_with_two_empty_spaces(long double * res, int n){
+void distribution_with_max_entropy(long double * res, int n){
     int i;
-    for(i=0; i < n-2; i++)
-      res[i] = rand()/(RAND_MAX*(long double)n);    
+    for(i=0; i < n; i++)
+      res[i] = 1/(long double)n;
 }
 
 
-long double sum_incomplete_distribution(long double * dist, int n){
+long double sum_distribution(long double * dist, int n){
     long double res = 0.;
     int i;
-    for(i=0; i < n-2; i++)
+    for(i=0; i < n; i++)
         res += dist[i];
     return res;
 }
 
 /********************** FIRST STEP FUNCTIONS **********************/
 
-double maximal_entropy_of_two_values(long double partial_sum){
+long double maximal_entropy_of_two_values(long double partial_sum){
   return 2*h(partial_sum/2);
 }
+
+long double minimal_entropy_of_two_values(long double partial_sum){
+  return h(partial_sum-EPSILON)+h(EPSILON);
+}
+
 
 double reaching_factor(long double partial_sum, long double partial_ent, long double target){
   if(partial_ent > target || partial_sum > 1)
@@ -140,23 +147,42 @@ void multiply_by_factor(long double * distribution, int size, double factor){
     distribution[i] *= factor;
 }
 
+void add_delta(long double * distribution, int size, long double delta){
+  int i;
+  for(i = 0; i < size; i++)
+    distribution[i] += delta;
+}
+
+
 int reach_first_state(long double * distribution, long double target_entropy, int size){
   long double incomplete_dist_sum, incomplete_ent;
-  double factor;
-  random_doubles_with_two_empty_spaces(distribution, size);
-  incomplete_dist_sum = sum_incomplete_distribution(distribution, size);
+  long double min_entropy, max_entropy;
+  long double delta = 0.5/(long double)size;
+  distribution_with_max_entropy(distribution, size);
+  incomplete_dist_sum = sum_distribution(distribution, size-2);
   incomplete_ent = shannon_entropy(distribution, size-2);
-  while((factor = reaching_factor(incomplete_dist_sum, incomplete_ent, target_entropy)) != 0){
-    __MULTIPLICATIONS_BY_FACTOR__++;
+  min_entropy = incomplete_ent+minimal_entropy_of_two_values(1-incomplete_dist_sum);
+  max_entropy = incomplete_ent+maximal_entropy_of_two_values(1-incomplete_dist_sum);
+  
+  while( max_entropy < target_entropy || min_entropy > target_entropy){
+    __FIRST_STATE_ITERATIONS__++;    
+    if(incomplete_ent + maximal_entropy_of_two_values(1-incomplete_dist_sum) < target_entropy)
+      add_delta(distribution, size-2, delta);
+    else
+      add_delta(distribution, size-2, -delta);
     
-    multiply_by_factor(distribution, size, factor);
-    incomplete_dist_sum = sum_incomplete_distribution(distribution, size);
+
+    incomplete_dist_sum = sum_distribution(distribution, size-2);
     incomplete_ent = shannon_entropy(distribution, size-2);
+    min_entropy = incomplete_ent+minimal_entropy_of_two_values(1-incomplete_dist_sum);
+    max_entropy = incomplete_ent+maximal_entropy_of_two_values(1-incomplete_dist_sum);
+    delta/=2;
   }
   distribution[size-2] = aim_shannon_entropy(1-incomplete_dist_sum,
-					     target_entropy - incomplete_ent);
+					     target_entropy - incomplete_ent);  
   if(distribution[size-2] < 0)
     return -1;
+  
 										
   distribution[size-1] = 1-incomplete_dist_sum - distribution[size-2];
   
@@ -166,11 +192,15 @@ int reach_first_state(long double * distribution, long double target_entropy, in
 /********************** MARKOV CHAIN STEP **********************/
 
 inline long double lower_approximation_function(long double s, long double t){
-  return (s*log(2) + sqrt(-log(2)*log(s)*s*s + s*s*log(2)*log(2) - log(2)*log(2)*s*t))/(2*log(2));    
+  return s-(s*log(2) + sqrt(-log(2)*log(s)*s*s + s*s*log(2)*log(2) - log(2)*log(2)*s*t))/(2*log(2));    
 }
 
 inline long double upper_approximation_function(long double s, long double t){
   return MIN(1,(4*log(2)*s + sqrt(18*log(2)*log(2)*s*s - 20*log(2)*log(2)*s*t - 20*log(2)*log(s/2)*s*s))/(10*log(2)));
+}
+
+inline long double lower_upper_approximation_function(long double s, long double t){
+  return MAX(0, 0.2999999996*s - sqrt(-(0.2740337179*s*log(s) - 0.30105681*s + 0.1899456989*t)*s));
 }
 
 long double random_value_in_approx_interval(long double s, long double t){
@@ -187,7 +217,8 @@ long double random_value_in_approx_interval(long double s, long double t){
     else
       return drand48()*lower_approx;
   }
-  return res*upper_approx;
+  long double lower_upper_approx = lower_upper_approximation_function(s,t);
+  return res*(upper_approx-lower_upper_approx)+lower_upper_approx;
 }
 
 void random_triplet(int max_value, int * res){
@@ -206,6 +237,7 @@ void markov_chain_step(long double * dist, int max_value){
     target = h(dist[triplet[0]]) + h(dist[triplet[1]]) + h(dist[triplet[2]]);
     do { 
       step[0] = random_value_in_approx_interval(sum, target);
+      __ENTROPY_MARKOV_STEP_FAILURES__++;
     } while ( h(step[0]) >= target );
     step[1] = aim_shannon_entropy(sum - step[0], target - h(step[0]));
     
@@ -230,7 +262,6 @@ void distribution_markov_chain(long double * res, long double target_entropy, in
 }
 
 void random_distribution_generator(long double * res, long double target_entropy, int size, int steps){
-    int i;
     if(target_entropy < log2(size)){
       if(size > 2)
 	distribution_markov_chain(res, target_entropy, size, steps);
@@ -239,10 +270,8 @@ void random_distribution_generator(long double * res, long double target_entropy
 	res[1] = 1-res[0];
       }
     }
-    else{ //Entropy is maximal
-      for(i = 0; i < size; i++)
-	res[i] =  1/(long double)size;
-    }
+    else //Entropy is maximal
+      distribution_with_max_entropy(res, size);    
 }
 
 int draw_according_to_distribution(long double * distribution, int max_value){
